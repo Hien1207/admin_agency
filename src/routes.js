@@ -1,13 +1,13 @@
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
 import Subjects from "layouts/subjects";
-import Department from "layouts/department";
 import Class from "layouts/classed";
 import Teacher from "layouts/teacher";
 import Student from "layouts/student";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
+import Vehicle from "layouts/vehicle";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -23,42 +23,42 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Quản lý khoa",
-    key: "admin/department",
+    name: "Manage vehicles",
+    key: "admin/vehicle",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/admin/department",
-    component: <Department />,
+    route: "/admin/vehicle",
+    component: <Vehicle />,
   },
   {
     type: "collapse",
-    name: "Quản lý lớp học",
-    key: "admin/class",
+    name: "Manage routes",
+    key: "admin/route",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/admin/class",
+    route: "/admin/route",
     component: <Class />,
   },
   {
     type: "collapse",
-    name: "Quản lý môn học",
-    key: "admin/subjects",
+    name: "Manage tríp",
+    key: "admin/trip",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/admin/subjects",
+    route: "/admin/trip",
     component: <Subjects />,
   },
   {
     type: "collapse",
-    name: "Quản lý giáo viên",
-    key: "admin/teacher",
+    name: "History booking",
+    key: "admin/history",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/admin/teacher",
+    route: "/admin/history",
     component: <Teacher />,
   },
   {
     type: "collapse",
-    name: "Quản lý sinh viên",
-    key: "admin/student",
+    name: "Revenue",
+    key: "admin/revenue",
     icon: <Icon fontSize="small">receipt_long</Icon>,
-    route: "/admin/student",
+    route: "/admin/revenue",
     component: <Student />,
   },
   {

@@ -1,7 +1,7 @@
 import axios from "axios";
 import baseUrl from "./config";
 
-const getDepartment = (setDepartments) => {
+const getVehicle = (setVehicles) => {
   axios({
     method: "get",
     url: `${baseUrl}all-faculty`,
@@ -10,17 +10,17 @@ const getDepartment = (setDepartments) => {
     .then((data) => data.body)
     .then((body) => {
       // console.log(body);
-      setDepartments(body);
+      setVehicles(body);
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const createDepartment = (department) => {
+const createVehicle = (Vehicle) => {
   axios({
     method: "post",
-    url: `${baseUrl}create-faculty?name=${department}`,
+    url: `${baseUrl}create-faculty?name=${Vehicle}`,
   })
     .then((res) => res.data)
     .then((data) => {
@@ -31,4 +31,4 @@ const createDepartment = (department) => {
     });
 };
 
-export { getDepartment, createDepartment };
+export { getVehicle, createVehicle };
