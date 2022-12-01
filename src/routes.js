@@ -1,13 +1,14 @@
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Subjects from "layouts/subjects";
-import Class from "layouts/classed";
-import Teacher from "layouts/teacher";
-import Student from "layouts/student";
 import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Vehicle from "layouts/vehicle";
+import Route from "layouts/route";
+import TripInstance from "layouts/tripInstance";
+import Trip from "layouts/trip";
+import HistoryBooking from "layouts/historyBooking";
+import Revenue from "layouts/revenue";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
@@ -35,15 +36,23 @@ const routes = [
     key: "admin/route",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/route",
-    component: <Class />,
+    component: <Route />,
   },
   {
     type: "collapse",
-    name: "Manage tríp",
+    name: "Manage TripInstance",
+    key: "admin/tripInstance",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/admin/tripInstance",
+    component: <TripInstance />,
+  },
+  {
+    type: "collapse",
+    name: "Manage Trip",
     key: "admin/trip",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/trip",
-    component: <Subjects />,
+    component: <Trip />,
   },
   {
     type: "collapse",
@@ -51,7 +60,7 @@ const routes = [
     key: "admin/history",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/history",
-    component: <Teacher />,
+    component: <HistoryBooking />,
   },
   {
     type: "collapse",
@@ -59,7 +68,7 @@ const routes = [
     key: "admin/revenue",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/revenue",
-    component: <Student />,
+    component: <Revenue />,
   },
   {
     type: "collapse",

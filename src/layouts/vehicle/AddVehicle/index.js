@@ -83,7 +83,7 @@ function AddVehicle({ setClickSave }) {
             />
           </MDBox>
         </MDBox>
-        <MDBox mt={1} mb={2} ml="70%" width="50px">
+        <MDBox mt={1} mb={2} ml="83%" width="50px">
           <MDButton
             component=""
             to="/admin/dashboard"
