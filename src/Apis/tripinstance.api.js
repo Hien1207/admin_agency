@@ -2,10 +2,10 @@ import axios from "axios";
 import { STORAGE, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-const getVehicle = (setVehicles) => {
+const getTripInstance = (setTripInstance) => {
   axios({
     method: "get",
-    url: `${baseUrl}all-vehicle-agency`,
+    url: `${baseUrl}admin/get-trip-instance`,
     headers: {
       Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
     },
@@ -13,8 +13,8 @@ const getVehicle = (setVehicles) => {
     .then((res) => res.data)
     .then((data) => data.body)
     .then((body) => {
-      // console.log(body);
-      setVehicles(body);
+      console.log(body);
+      setTripInstance(body);
     })
     .catch((err) => {
       console.log(err);
@@ -78,4 +78,4 @@ const updateVehicle = (Data) => {
     });
 };
 
-export { getVehicle, createVehicle, updateVehicle, getAllVehicle };
+export { getTripInstance, createVehicle, updateVehicle, getAllVehicle };

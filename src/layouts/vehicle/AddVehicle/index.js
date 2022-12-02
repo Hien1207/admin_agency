@@ -10,8 +10,14 @@ import { createVehicle } from "Apis/vehicle.api";
 import { PropTypes } from "prop-types";
 
 function AddVehicle({ setClickSave }) {
-  const [vehicle, setVehicle] = useState("");
+  const [vehicle, setVehicle] = useState({
+    licensePlate: "",
+    nameVehicle: "",
+    seatQuantity: 0,
+    status: true,
+  });
   const handleCreateVehicle = () => {
+    console.log(vehicle);
     createVehicle(vehicle);
     setClickSave(true);
   };
@@ -33,7 +39,10 @@ function AddVehicle({ setClickSave }) {
               variant="outlined"
               sx={{ mt: -1, width: "24ch" }}
               onChange={(e) => {
-                setVehicle(e.target.value);
+                setVehicle({
+                  ...vehicle,
+                  nameVehicle: e.target.value,
+                });
               }}
             />
           </MDBox>
@@ -48,7 +57,10 @@ function AddVehicle({ setClickSave }) {
               variant="outlined"
               sx={{ mt: -1, width: "24ch" }}
               onChange={(e) => {
-                setVehicle(e.target.value);
+                setVehicle({
+                  ...vehicle,
+                  licensePlate: e.target.value,
+                });
               }}
             />
           </MDBox>
@@ -63,12 +75,15 @@ function AddVehicle({ setClickSave }) {
               variant="outlined"
               sx={{ mt: -1, width: "24ch" }}
               onChange={(e) => {
-                setVehicle(e.target.value);
+                setVehicle({
+                  ...vehicle,
+                  seatQuantity: e.target.value,
+                });
               }}
             />
           </MDBox>
         </MDBox>
-        <MDBox mb={2} display="flex">
+        {/* <MDBox mb={2} display="flex">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="80px">
             Status
           </MDTypography>
@@ -78,11 +93,13 @@ function AddVehicle({ setClickSave }) {
               variant="outlined"
               sx={{ mt: -1, width: "24ch" }}
               onChange={(e) => {
-                setVehicle(e.target.value);
+                setVehicle({
+                  ...vehicle,
+                });
               }}
             />
           </MDBox>
-        </MDBox>
+        </MDBox> */}
         <MDBox mt={1} mb={2} ml="83%" width="50px">
           <MDButton
             component=""

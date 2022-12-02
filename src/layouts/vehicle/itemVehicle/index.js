@@ -33,18 +33,27 @@ import Dialog from "@mui/material/Dialog";
 import DialogActions from "@mui/material/DialogActions";
 import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
+import { updateVehicle } from "Apis/vehicle.api";
 
 function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
   const [open, setOpen] = React.useState(false);
+  const [vehicle, setVehicle] = React.useState({
+    licensePlate: licensePlate,
+    nameVehicle: name,
+    seatQuantity: seatQuantity,
+    status: true,
+  });
   const handleClickOpen = () => {
     setOpen(true);
   };
   const handleClose = () => {
     setOpen(false);
   };
-
+  const handleUpdateVehicle = () => {
+    updateVehicle(vehicle);
+  };
   return (
     <MDBox pl={3} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
       <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px">
@@ -84,6 +93,13 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
+            defaultValue={name}
+            onChange={(e) => {
+              setVehicle({
+                ...vehicle,
+                nameVehicle: e.target.value,
+              });
+            }}
           />
           <TextField
             autoFocus
@@ -94,6 +110,13 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
+            defaultValue={licensePlate}
+            onChange={(e) => {
+              setVehicle({
+                ...vehicle,
+                licensePlate: e.target.value,
+              });
+            }}
           />
           <TextField
             autoFocus
@@ -104,8 +127,15 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
+            defaultValue={seatQuantity}
+            onChange={(e) => {
+              setVehicle({
+                ...vehicle,
+                seatQuantity: e.target.value,
+              });
+            }}
           />
-          <TextField
+          {/* <TextField
             autoFocus
             margin="dense"
             id="name"
@@ -114,11 +144,25 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
-          />
+            defaultValue={status}
+            onChange={(e) => {
+              setVehicle({
+                ...vehicle,
+                nameVehicle: e.target.value,
+              });
+            }}
+          /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Cancel</Button>
-          <Button onClick={handleClose}>Update</Button>
+          <Button
+            onClick={() => {
+              handleUpdateVehicle();
+              handleClose();
+            }}
+          >
+            Update
+          </Button>
         </DialogActions>
       </Dialog>
     </MDBox>

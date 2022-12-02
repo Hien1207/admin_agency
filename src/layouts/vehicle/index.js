@@ -10,10 +10,15 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ListVehicle from "layouts/vehicle/ListVehicle";
 import AddVehicle from "layouts/vehicle/AddVehicle";
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { getVehicle } from "Apis/vehicle.api";
 
 function Vehicle() {
   const [clickSave, setClickSave] = useState(false);
+  const [vehicles, setVehicles] = useState([]);
+  useEffect(() => {
+    getVehicle(setVehicles);
+  }, []);
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -37,7 +42,11 @@ function Vehicle() {
             <MDBox mb={3}>
               <Grid container spacing={3}>
                 <Grid item xs={12} md={8}>
-                  <ListVehicle clickSave={clickSave} setClickSave={setClickSave} />
+                  <ListVehicle
+                    clickSave={clickSave}
+                    setClickSave={setClickSave}
+                    vehicles={vehicles}
+                  />
                 </Grid>
                 <Grid item xs={12} md={4}>
                   <AddVehicle setClickSave={setClickSave} />

@@ -6,8 +6,9 @@ import MDTypography from "components/MDTypography";
 import DataTable from "examples/Tables/DataTable";
 import tabledatatrip from "layouts/tripInstance/data/tabledatatrip";
 import Item from "layouts/tripInstance/itemTrip";
+import { PropTypes } from "prop-types";
 
-function ListTrip() {
+function ListTrip({ tripInstances }) {
   const { columns, rows } = tabledatatrip();
 
   return (
@@ -27,12 +28,26 @@ function ListTrip() {
             noEndBorder
           />
           <MDBox mt="-40px">
-            <Item stt="1" route="Đà Nẵng" date="22-11-2022" time="07:00:00" />
+            {tripInstances.length > 1
+              ? tripInstances.map((item, index) => (
+                  <Item
+                    stt={index + 1}
+                    departure={item.route.departure.nameStation}
+                    arrival={item.route.arrival.nameStation}
+                    date={item.date}
+                    time={item.timeStart}
+                  />
+                ))
+              : null}
           </MDBox>
         </MDBox>
       </MDBox>
     </Card>
   );
 }
+
+ListTrip.propTypes = {
+  tripInstances: PropTypes.arrayOf.isRequired,
+};
 
 export default ListTrip;
