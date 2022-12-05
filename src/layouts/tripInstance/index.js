@@ -11,8 +11,14 @@ import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ListStation from "layouts/tripInstance/ListStation";
 import AddTrip from "layouts/tripInstance/AddTrip";
 import ListTrip from "layouts/tripInstance/ListTrip";
+import { useEffect, useState } from "react";
+import { getTripInstance } from "Apis/tripinstance.api";
 
 function Trip() {
+  const [tripInstances, setTripInstances] = useState([]);
+  useEffect(() => {
+    getTripInstance(setTripInstances);
+  }, []);
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -42,7 +48,7 @@ function Trip() {
                   <ListStation />
                 </Grid>
               </Grid>
-              <ListTrip />
+              <ListTrip tripInstances={tripInstances} />
             </MDBox>
           </Grid>
         </Grid>

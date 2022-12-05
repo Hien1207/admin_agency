@@ -1,3 +1,3 @@
-const baseUrl = "https://score-manager-be.herokuapp.com/api/";
+const baseUrl = "https://book-ticket-doan.herokuapp.com/api/";
 
 export default baseUrl;

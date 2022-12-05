@@ -1,5 +1,5 @@
 import Card from "@mui/material/Card";
-import { getVehicle } from "Apis/vehicle.api";
+import { getAllVehicle } from "Apis/vehicle.api";
 
 // Material Dashboard 2 React components
 import MDBox from "components/MDBox";
@@ -11,14 +11,14 @@ import { useEffect, useState } from "react";
 import { PropTypes } from "prop-types";
 
 function ListVehicle(props) {
-  const { clickSave, setClickSave } = props;
+  const { clickSave, setClickSave, vehicles } = props;
   const { columns, rows } = authorsTableData();
   const [Vehicles, setVehicles] = useState([]);
   useEffect(() => {
-    getVehicle(setVehicles);
+    getAllVehicle(setVehicles);
   }, []);
   useEffect(() => {
-    getVehicle(setVehicles);
+    getAllVehicle(setVehicles);
     setClickSave(false);
   }, [clickSave]);
   return (
@@ -38,16 +38,27 @@ function ListVehicle(props) {
             noEndBorder
           />
           <MDBox mt="-40px">
-            {Vehicles.map((item) => (
-              <Item
-                stt={item.id.toString()}
-                name={item.name}
-                licensePlate={item.name}
-                seatQuantity="46"
-                status="true"
-                key={item.id}
-              />
-            ))}
+            {false
+              ? Vehicles.map((item, index) => (
+                  <Item
+                    stt={index + 1}
+                    name={item.nameVehicle}
+                    licensePlate={item.licensePlate}
+                    seatQuantity={item.seatQuantity.quantity}
+                    status={item.status ? "true" : "false"}
+                    key={item.id}
+                  />
+                ))
+              : vehicles.map((item, index) => (
+                  <Item
+                    stt={index + 1}
+                    name={item.nameVehicle}
+                    licensePlate={item.licensePlate}
+                    seatQuantity={item.seatQuantity.quantity}
+                    status={item.status ? "true" : "false"}
+                    key={item.id}
+                  />
+                ))}
           </MDBox>
         </MDBox>
       </MDBox>
@@ -58,6 +69,7 @@ function ListVehicle(props) {
 ListVehicle.propTypes = {
   clickSave: PropTypes.bool.isRequired,
   setClickSave: PropTypes.func.isRequired,
+  vehicles: PropTypes.arrayOf.isRequired,
 };
 
 export default ListVehicle;
