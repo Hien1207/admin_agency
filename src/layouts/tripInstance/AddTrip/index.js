@@ -6,8 +6,20 @@ import MDTypography from "components/MDTypography";
 import TextField from "@mui/material/TextField";
 import MDButton from "components/MDButton";
 import * as React from "react";
+import { PropTypes } from "prop-types";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { createTripInstance } from "Apis/tripinstance.api";
 
-function AddTrip() {
+function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNotification }) {
+  const [dataAdd, setDataAdd] = React.useState({
+    date: "",
+    idRoute: 0,
+    timeStart: "",
+  });
+  const handleCreateTripInstance = () => {
+    // console.log(dataAdd);
+    createTripInstance(dataAdd, setIsSave, setNotification);
+  };
   return (
     <Card sx={{ height: "370px", mb: 4 }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={4}>
@@ -17,48 +29,90 @@ function AddTrip() {
       </MDBox>
       <MDBox mt={3} pb={2} px={4}>
         <MDBox mb={2} display="flex">
-          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="70px">
+          {/* <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="30%">
             Trip station
-          </MDTypography>
+          </MDTypography> */}
           <MDBox ml={0} mt={1} width="22rem" display="block">
             <MDBox mb={2} display="flex">
-              <MDTypography variant="caption" color="text" fontWeight="bold" width="150px">
+              <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
                 route
               </MDTypography>
-              <MDBox ml={0} width="15rem">
-                <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
+              <MDBox ml={0} width="70%">
+                <FormControl
+                  size="small"
+                  sx={{ width: "100%" }}
+                  style={{
+                    height: 40,
+                  }}
+                >
+                  <InputLabel id="demo-simple-select-label">Route</InputLabel>
+                  <Select
+                    labelId="demo-simple-select-label"
+                    id="demo-simple-select"
+                    label="Lop"
+                    defaultValue={0}
+                    onChange={(e) => {
+                      setIdRouteChosen(e.target.value);
+                      setIsSaveStation(true);
+                      setDataAdd({
+                        ...dataAdd,
+                        idRoute: e.target.value,
+                      });
+                    }}
+                    style={{ height: "100%" }}
+                  >
+                    <MenuItem value={0}>Tất Cả</MenuItem>
+                    {routes.map((item) => (
+                      <MenuItem value={item.route.id} key={item.route.id}>
+                        {item.route.departure.nameStation} to {item.route.arrival.nameStation}
+                      </MenuItem>
+                    ))}
+                  </Select>
+                </FormControl>
               </MDBox>
             </MDBox>
             <MDBox mb={2} mt={4} display="flex">
-              <MDTypography variant="caption" color="text" fontWeight="bold" width="150px">
+              <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
                 date
               </MDTypography>
-              <MDBox ml={0} width="15rem">
+              <MDBox ml={0} width="70%">
                 <TextField
                   id="date"
                   label="Select Date"
                   type="date"
                   defaultValue="2022-12-02"
-                  sx={{ width: "24ch", mt: -1 }}
+                  sx={{ width: "100%", mt: -1 }}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  onChange={(e) => {
+                    setDataAdd({
+                      ...dataAdd,
+                      date: e.target.value,
+                    });
                   }}
                 />
               </MDBox>
             </MDBox>
             <MDBox mb={2} mt={4} display="flex">
-              <MDTypography variant="caption" color="text" fontWeight="bold" width="150px">
+              <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
                 time start
               </MDTypography>
-              <MDBox ml={0} width="15rem">
+              <MDBox ml={0} width="70%">
                 <TextField
                   id="time"
                   label="Select Time"
                   type="time"
                   defaultValue="03:30"
-                  sx={{ width: "24ch", mt: -1 }}
+                  sx={{ width: "100%", mt: -1 }}
                   InputLabelProps={{
                     shrink: true,
+                  }}
+                  onChange={(e) => {
+                    setDataAdd({
+                      ...dataAdd,
+                      timeStart: `${e.target.value}:00`,
+                    });
                   }}
                 />
               </MDBox>
@@ -66,7 +120,16 @@ function AddTrip() {
           </MDBox>
         </MDBox>
         <MDBox mt={4} mb={2} ml="79%" width="50px">
-          <MDButton component="" to="/admin/dashboard" variant="gradient" fullWidth color="info">
+          <MDButton
+            component=""
+            to="/admin/dashboard"
+            variant="gradient"
+            fullWidth
+            color="info"
+            onClick={() => {
+              handleCreateTripInstance();
+            }}
+          >
             Save
           </MDButton>
         </MDBox>
@@ -74,5 +137,13 @@ function AddTrip() {
     </Card>
   );
 }
+
+AddTrip.propTypes = {
+  routes: PropTypes.arrayOf.isRequired,
+  setIdRouteChosen: PropTypes.func.isRequired,
+  setIsSaveStation: PropTypes.func.isRequired,
+  setIsSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
+};
 
 export default AddTrip;

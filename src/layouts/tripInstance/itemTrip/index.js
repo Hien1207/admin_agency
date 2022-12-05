@@ -28,10 +28,50 @@ import MDButton from "components/MDButton";
 
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "context";
+import Dialog from "@mui/material/Dialog";
+import DialogActions from "@mui/material/DialogActions";
+import DialogContent from "@mui/material/DialogContent";
+import DialogTitle from "@mui/material/DialogTitle";
+import { Button, TextField } from "@mui/material";
+import { deleteTripInstance, updateTripInstance } from "Apis/tripinstance.api";
 
-function ItemTrip({ stt, departure, arrival, date, time }) {
+function ItemTrip({
+  stt,
+  departure,
+  arrival,
+  date,
+  time,
+  hide,
+  idTripInstance,
+  idRoute,
+  setIsSave,
+  setNotification,
+}) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
+  const [open, setOpen] = React.useState(false);
+  const [dataUpdate, setDataUpdate] = React.useState({
+    date: "",
+    idRoute: 0,
+    idTripInstance: 0,
+    timeStart: "",
+  });
+  React.useEffect(() => {
+    setDataUpdate({ date, idRoute, idTripInstance, timeStart: time });
+  }, []);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDeleteTripInstance = () => {
+    // alert(idTripInstance);
+    deleteTripInstance(idTripInstance, setIsSave, setNotification);
+  };
+  const handleUpdateTripInstance = () => {
+    updateTripInstance(dataUpdate, setIsSave, setNotification);
+  };
   return (
     <MDBox
       pl={3}
@@ -41,7 +81,7 @@ function ItemTrip({ stt, departure, arrival, date, time }) {
       borderBottom="0.2px solid #f0f2f5"
       width="100%"
     >
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="10%">
         {stt}
       </MDTypography>
       <MDTypography
@@ -49,30 +89,113 @@ function ItemTrip({ stt, departure, arrival, date, time }) {
         color="text"
         fontWeight="medium"
         ml={1}
-        width="30%"
+        width="17%"
         textAlign="left"
       >
         {departure}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="40%">
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={1}
+        width="17%"
+        textAlign="left"
+      >
         {arrival}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="60%">
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={1}
+        width="17%"
+        textAlign="left"
+      >
         {date}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="40%">
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={1}
+        width="17%"
+        textAlign="left"
+      >
         {time}
       </MDTypography>
-      <MDBox display="flex" alignItems="center" mt={-2}>
-        <MDBox mr={2} ml={2}>
-          <MDButton variant="text" color="error">
-            <Icon>delete</Icon>&nbsp;delete
+      {hide ? (
+        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
+          {null}
+        </MDBox>
+      ) : (
+        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
+          <MDBox mr={2} ml={2}>
+            <MDButton
+              variant="text"
+              color="error"
+              onClick={() => {
+                handleDeleteTripInstance();
+              }}
+            >
+              <Icon>delete</Icon>&nbsp;delete
+            </MDButton>
+          </MDBox>
+          <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
+            <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         </MDBox>
-        <MDButton variant="text" color={darkMode ? "white" : "dark"}>
-          <Icon>edit</Icon>&nbsp;edit
-        </MDButton>
-      </MDBox>
+      )}
+      <Dialog open={open} onClose={handleClose}>
+        <DialogTitle ml="43%">Update</DialogTitle>
+        <DialogContent>
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Date"
+            type="date"
+            fullWidth
+            variant="standard"
+            sx={{ width: "450px", mx: 4 }}
+            value={dataUpdate.date}
+            onChange={(e) => {
+              setDataUpdate({
+                ...dataUpdate,
+                date: e.target.value,
+              });
+            }}
+          />
+          <TextField
+            autoFocus
+            margin="dense"
+            id="name"
+            label="Time"
+            type="time"
+            fullWidth
+            variant="standard"
+            sx={{ width: "450px", mx: 4 }}
+            value={dataUpdate.timeStart}
+            onChange={(e) => {
+              setDataUpdate({
+                ...dataUpdate,
+                timeStart: `${e.target.value}:00`,
+              });
+            }}
+          />
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              handleUpdateTripInstance();
+              handleClose();
+            }}
+          >
+            Update
+          </Button>
+        </DialogActions>
+      </Dialog>
     </MDBox>
   );
 }
@@ -83,6 +206,11 @@ ItemTrip.propTypes = {
   time: PropTypes.string.isRequired,
   departure: PropTypes.string.isRequired,
   arrival: PropTypes.string.isRequired,
+  idTripInstance: PropTypes.number.isRequired,
+  idRoute: PropTypes.number.isRequired,
+  hide: PropTypes.bool.isRequired,
+  setIsSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
 };
 
 export default ItemTrip;

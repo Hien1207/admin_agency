@@ -35,16 +35,34 @@ import DialogContent from "@mui/material/DialogContent";
 import DialogTitle from "@mui/material/DialogTitle";
 import { updateVehicle } from "Apis/vehicle.api";
 
-function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
+function ItemVehicle({
+  stt,
+  name,
+  licensePlate,
+  seatQuantity,
+  status,
+  setClickSave,
+  setNotification,
+  hide,
+}) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
   const [open, setOpen] = React.useState(false);
   const [vehicle, setVehicle] = React.useState({
-    licensePlate: licensePlate,
+    licensePlate,
     nameVehicle: name,
-    seatQuantity: seatQuantity,
+    seatQuantity,
     status: true,
   });
+  React.useEffect(() => {
+    // console.log(setclickSave);
+    setVehicle({
+      licensePlate,
+      nameVehicle: name,
+      seatQuantity,
+      status: true,
+    });
+  }, []);
   const handleClickOpen = () => {
     setOpen(true);
   };
@@ -52,35 +70,42 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
     setOpen(false);
   };
   const handleUpdateVehicle = () => {
-    updateVehicle(vehicle);
+    updateVehicle({ ...vehicle }, setClickSave, setNotification);
   };
   return (
-    <MDBox pl={3} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px">
+    <MDBox pl={1} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
+      <MDTypography variant="caption" color="text" fontWeight="medium" width="10%">
         {stt}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={6} width="20%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" width="20%">
         {name}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="18%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="15%">
         {licensePlate}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="10%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="15%">
         {seatQuantity}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={4} width="10%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="10%">
         {status}
       </MDTypography>
-      <MDBox display="flex" alignItems="center" mt={-2}>
-        <MDBox mr={6} ml={2}>
-          <MDButton variant="text" color="error">
-            <Icon>delete</Icon>&nbsp;delete
+      {/* <TextField type="checkbox" value={status} /> */}
+      {hide ? (
+        <MDBox display="flex" alignItems="center" mt={-2} width="15%">
+          {null}
+        </MDBox>
+      ) : (
+        <MDBox display="flex" alignItems="center" mt={-3} width="15%">
+          <MDBox>
+            <MDButton variant="text" color="error">
+              <Icon>delete</Icon>&nbsp;delete
+            </MDButton>
+          </MDBox>
+          <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
+            <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         </MDBox>
-        <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-          <Icon>edit</Icon>&nbsp;edit
-        </MDButton>
-      </MDBox>
+      )}
       <Dialog open={open} onClose={handleClose}>
         <DialogTitle ml="43%">Update</DialogTitle>
         <DialogContent>
@@ -93,7 +118,7 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
-            defaultValue={name}
+            value={vehicle.nameVehicle}
             onChange={(e) => {
               setVehicle({
                 ...vehicle,
@@ -110,7 +135,7 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
-            defaultValue={licensePlate}
+            value={vehicle.licensePlate}
             onChange={(e) => {
               setVehicle({
                 ...vehicle,
@@ -127,7 +152,7 @@ function ItemVehicle({ stt, name, licensePlate, seatQuantity, status }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
-            defaultValue={seatQuantity}
+            value={vehicle.seatQuantity}
             onChange={(e) => {
               setVehicle({
                 ...vehicle,
@@ -175,6 +200,9 @@ ItemVehicle.propTypes = {
   licensePlate: PropTypes.string.isRequired,
   seatQuantity: PropTypes.string.isRequired,
   status: PropTypes.string.isRequired,
+  setClickSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
+  hide: PropTypes.bool.isRequired,
 };
 
 export default ItemVehicle;

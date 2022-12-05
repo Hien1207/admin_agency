@@ -2,7 +2,7 @@ import axios from "axios";
 import { STORAGE, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-const getVehicle = (setVehicles) => {
+const getVehicle = (setVehicles, setIsSave) => {
   axios({
     method: "get",
     url: `${baseUrl}all-vehicle-agency`,
@@ -15,32 +15,34 @@ const getVehicle = (setVehicles) => {
     .then((body) => {
       // console.log(body);
       setVehicles(body);
+      setIsSave(false);
     })
     .catch((err) => {
       console.log(err);
     });
 };
 
-const getAllVehicle = (setAllVehicles) => {
-  axios({
-    method: "get",
-    url: `${baseUrl}all-vehicle`,
-    headers: {
-      Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
-    },
-  })
-    .then((res) => res.data)
-    .then((data) => data.body)
-    .then((body) => {
-      // console.log(body);
-      setAllVehicles(body);
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-};
+// const getAllVehicle = (setAllVehicles, setIsSave) => {
+//   axios({
+//     method: "get",
+//     url: `${baseUrl}all-vehicle`,
+//     headers: {
+//       Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+//     },
+//   })
+//     .then((res) => res.data)
+//     .then((data) => data.body)
+//     .then((body) => {
+//       // console.log(body);
+//       setAllVehicles(body);
+//       setIsSave(false);
+//     })
+//     .catch((err) => {
+//       console.log(err);
+//     });
+// };
 
-const createVehicle = (Data) => {
+const createVehicle = (Data, setIsSave, setNotification) => {
   axios({
     method: "post",
     url: `${baseUrl}create-vehicle`,
@@ -53,15 +55,18 @@ const createVehicle = (Data) => {
     .then((data) => data.body)
     .then((body) => {
       console.log(body);
+      setNotification(body);
+      setIsSave(true);
     })
     .catch((err) => {
+      setNotification("error");
       console.log(err);
     });
 };
 
-const updateVehicle = (Data) => {
+const updateVehicle = (Data, setIsSave, setNotification) => {
   axios({
-    method: "post",
+    method: "put",
     url: `${baseUrl}update-vehicle`,
     data: Data,
     headers: {
@@ -71,11 +76,13 @@ const updateVehicle = (Data) => {
     .then((res) => res.data)
     .then((data) => data.body)
     .then((body) => {
-      console.log(body);
+      setNotification(body);
+      setIsSave(true);
     })
     .catch((err) => {
+      setNotification("error");
       console.log(err);
     });
 };
 
-export { getVehicle, createVehicle, updateVehicle, getAllVehicle };
+export { getVehicle, createVehicle, updateVehicle };

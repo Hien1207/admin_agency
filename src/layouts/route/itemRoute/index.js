@@ -28,40 +28,46 @@ import MDButton from "components/MDButton";
 import { useMaterialUIController } from "context";
 import * as React from "react";
 
-function ItemRoute({ stt, dep, des, quantity, station, time }) {
+function ItemRoute({ stt, dep, des, quantity, station, time, hide }) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
 
   return (
     <MDBox pl={3} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px">
+      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
         {stt}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={8} width="24%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={8} width="13%">
         {dep}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="30%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
         {des}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="18%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
         {quantity}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="25%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
         {station}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="12%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
         {time}
       </MDTypography>
-      <MDBox display="flex" alignItems="center" mt={-2}>
-        <MDBox mr={2} ml={2}>
-          <MDButton variant="text" color="error">
-            <Icon>delete</Icon>&nbsp;delete
+      {hide ? (
+        <MDBox display="flex" alignItems="center" mt={-2} width="30%">
+          {null}
+        </MDBox>
+      ) : (
+        <MDBox display="flex" alignItems="center" mt={-2} width="30%">
+          <MDBox mr={2} ml={2}>
+            <MDButton variant="text" color="error">
+              <Icon>delete</Icon>&nbsp;delete
+            </MDButton>
+          </MDBox>
+          <MDButton variant="text" color={darkMode ? "white" : "dark"}>
+            <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         </MDBox>
-        <MDButton variant="text" color={darkMode ? "white" : "dark"}>
-          <Icon>edit</Icon>&nbsp;edit
-        </MDButton>
-      </MDBox>
+      )}
     </MDBox>
   );
 }
@@ -73,6 +79,7 @@ ItemRoute.propTypes = {
   quantity: PropTypes.string.isRequired,
   station: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  hide: PropTypes.bool.isRequired,
 };
 
 export default ItemRoute;

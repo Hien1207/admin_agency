@@ -16,20 +16,20 @@ function AddRoute() {
         </MDTypography>
       </MDBox>
       <MDBox mt={3} pb={2} px={4}>
-        <MDBox mb={2} display="flex">
-          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="70px">
+        <MDBox mb={2} display="flex" width="100%">
+          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="10%">
             Route
           </MDTypography>
           <MDBox ml={4} mt={1} width="15rem" display="block">
             <MDBox mb={2} display="flex">
               <MDTypography variant="caption" color="text" fontWeight="bold" width="70px">
-                dep
+                Dep
               </MDTypography>
               <MDBox ml={4} width="15rem">
                 <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
               </MDBox>
               <MDTypography variant="caption" color="text" fontWeight="bold" width="70px" ml={10}>
-                description
+                Description
               </MDTypography>
               <MDBox ml={4} width="15rem">
                 <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
@@ -37,13 +37,13 @@ function AddRoute() {
             </MDBox>
             <MDBox mb={2} mt={1} display="flex">
               <MDTypography variant="caption" color="text" fontWeight="bold" width="70px">
-                des
+                Des
               </MDTypography>
               <MDBox ml={4} width="15rem">
                 <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
               </MDBox>
               <MDTypography variant="caption" color="text" fontWeight="bold" width="70px" ml={10}>
-                description
+                Description
               </MDTypography>
               <MDBox ml={4} width="15rem">
                 <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
@@ -51,36 +51,29 @@ function AddRoute() {
             </MDBox>
           </MDBox>
         </MDBox>
-        <MDBox mb={2} mt={4} ml={5} display="flex">
-          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="100px">
+        <MDBox mb={2} mt={4} display="flex" width="100%" justifyContent="flex-start">
+          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="10%">
             Roustation
           </MDTypography>
-          <MDTypography
-            variant="caption"
-            color="text"
-            fontWeight="bold"
-            width="100px"
-            mt={0}
-            ml={0.5}
-          >
-            Quantity station (up to 2 stations)
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="20%" mt={0} ml={4}>
+            Quantity station (max 2 stations)
           </MDTypography>
-          <MDBox ml={3.8} width="15rem">
-            <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
+          <MDBox ml={3.8} width="70%">
+            <TextField variant="outlined" type="number" sx={{ mt: -1, width: "24ch" }} />
           </MDBox>
         </MDBox>
-        <MDBox mb={2} ml={18} mt={4} display="flex">
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="55px">
+        <MDBox mb={2} mt={4} display="flex" width="100%">
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
             station 1
           </MDTypography>
-          <MDBox ml={2} width="15rem">
-            <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
+          <MDBox ml={1} width="20%">
+            <TextField variant="outlined" sx={{ mt: -1, width: "100%" }} />
           </MDBox>
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="70px" ml={8}>
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={4}>
             description
           </MDTypography>
-          <MDBox ml={2} width="15rem">
-            <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
+          <MDBox ml={1} width="20%">
+            <TextField variant="outlined" sx={{ mt: -1, width: "100%" }} />
           </MDBox>
           <MDTypography variant="caption" color="text" fontWeight="bold" width="50px" ml={8}>
             time
@@ -98,18 +91,18 @@ function AddRoute() {
             />
           </MDBox>
         </MDBox>
-        <MDBox mb={2} ml={18} mt={4} display="flex">
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="55px">
+        <MDBox mb={2} mt={4} display="flex" width="100%">
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
             station 2
           </MDTypography>
-          <MDBox ml={2} width="15rem">
-            <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
+          <MDBox ml={1} width="20%">
+            <TextField variant="outlined" sx={{ mt: -1, width: "100%" }} />
           </MDBox>
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="70px" ml={8}>
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={4}>
             description
           </MDTypography>
-          <MDBox ml={2} width="15rem">
-            <TextField variant="outlined" sx={{ mt: -1, width: "24ch" }} />
+          <MDBox ml={1} width="20%">
+            <TextField variant="outlined" sx={{ mt: -1, width: "100%" }} />
           </MDBox>
           <MDTypography variant="caption" color="text" fontWeight="bold" width="50px" ml={8}>
             time
