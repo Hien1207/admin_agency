@@ -9,7 +9,7 @@ import { useState } from "react";
 import { createVehicle } from "Apis/vehicle.api";
 import { PropTypes } from "prop-types";
 
-function AddVehicle({ setClickSave }) {
+function AddVehicle({ setClickSave, setNotification }) {
   const [vehicle, setVehicle] = useState({
     licensePlate: "",
     nameVehicle: "",
@@ -17,9 +17,10 @@ function AddVehicle({ setClickSave }) {
     status: true,
   });
   const handleCreateVehicle = () => {
-    console.log(vehicle);
-    createVehicle(vehicle);
-    setClickSave(true);
+    // console.log(vehicle);
+    // setClickSave(false);
+    // console.log(setClickSave);
+    createVehicle(vehicle, setClickSave, setNotification);
   };
   return (
     <Card sx={{ height: "350px" }}>
@@ -29,15 +30,15 @@ function AddVehicle({ setClickSave }) {
         </MDTypography>
       </MDBox>
       <MDBox pt={3} pb={2} px={4}>
-        <MDBox mb={2} display="flex">
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="80px">
+        <MDBox mb={2} display="flex" justifyContent="flex-start">
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
             Name
           </MDTypography>
-          <MDBox ml={4} width="15rem">
+          <MDBox ml={4} width="70%">
             <TextField
               label="name"
               variant="outlined"
-              sx={{ mt: -1, width: "24ch" }}
+              sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {
                 setVehicle({
                   ...vehicle,
@@ -47,15 +48,15 @@ function AddVehicle({ setClickSave }) {
             />
           </MDBox>
         </MDBox>
-        <MDBox mb={2} display="flex">
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="80px">
+        <MDBox mb={2} display="flex" justifyContent="flex-start">
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
             License Plate
           </MDTypography>
-          <MDBox ml={4} width="15rem">
+          <MDBox ml={4} width="70%">
             <TextField
               label="licensePlate"
               variant="outlined"
-              sx={{ mt: -1, width: "24ch" }}
+              sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {
                 setVehicle({
                   ...vehicle,
@@ -66,14 +67,14 @@ function AddVehicle({ setClickSave }) {
           </MDBox>
         </MDBox>
         <MDBox mb={2} display="flex">
-          <MDTypography variant="caption" color="text" fontWeight="bold" width="80px">
+          <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
             Quantity seat
           </MDTypography>
-          <MDBox ml={4} width="15rem">
+          <MDBox ml={4} width="70%">
             <TextField
               label="quantityseat"
               variant="outlined"
-              sx={{ mt: -1, width: "24ch" }}
+              sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {
                 setVehicle({
                   ...vehicle,
@@ -120,6 +121,7 @@ function AddVehicle({ setClickSave }) {
 }
 AddVehicle.propTypes = {
   setClickSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
 };
 
 export default AddVehicle;

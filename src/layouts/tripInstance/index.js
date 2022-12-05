@@ -13,12 +13,73 @@ import AddTrip from "layouts/tripInstance/AddTrip";
 import ListTrip from "layouts/tripInstance/ListTrip";
 import { useEffect, useState } from "react";
 import { getTripInstance } from "Apis/tripinstance.api";
+import Loading from "components/Loading";
+import { getRoute, getRouteStationById } from "Apis/route.api";
+import { Alert, Button } from "@mui/material";
 
 function Trip() {
   const [tripInstances, setTripInstances] = useState([]);
+  const [listStation, setListStation] = useState([]);
+  const [routes, setRoutes] = useState([]);
+  const [isSave, setIsSave] = useState(true);
+  const [isSaveStation, setIsSaveStation] = useState(true);
+  const [idRouteChosen, setIdRouteChosen] = useState(0);
+  const [notification, setNotification] = useState("");
   useEffect(() => {
-    getTripInstance(setTripInstances);
-  }, []);
+    const notiTime = setTimeout(() => {
+      setNotification("");
+    }, 10000);
+    return () => {
+      clearTimeout(notiTime);
+    };
+  }, [notification]);
+  useEffect(() => {
+    if (isSave) {
+      getTripInstance(setTripInstances, setIsSave);
+      getRoute(setRoutes, setIsSave);
+    }
+  }, [isSave]);
+  useEffect(() => {
+    // alert(isSaveStation);
+    if (isSaveStation) {
+      if (idRouteChosen === 0) {
+        setListStation([]);
+        setIsSaveStation(false);
+      } else {
+        getRouteStationById(idRouteChosen, setListStation, setIsSaveStation);
+      }
+    }
+  }, [isSaveStation, idRouteChosen]);
+  const elemNoti = () => {
+    let res = null;
+    if (notification.length > 0) {
+      if (notification === "error") {
+        res = (
+          <Alert
+            severity="error"
+            style={{ marginBottom: "10px" }}
+            action={
+              <Button color="inherit" size="small">
+                UNDO
+              </Button>
+            }
+          >
+            {notification}
+          </Alert>
+        );
+      } else {
+        res = (
+          <Alert
+            severity="success"
+            style={{ marginBottom: "10px", backgroundColor: "rgb(212,250,218)" }}
+          >
+            {notification}
+          </Alert>
+        );
+      }
+    }
+    return res;
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -42,13 +103,32 @@ function Trip() {
             <MDBox mb={3} display="block">
               <Grid container spacing={3}>
                 <Grid item xs={12} md={5}>
-                  <AddTrip />
+                  <AddTrip
+                    routes={routes}
+                    setIdRouteChosen={setIdRouteChosen}
+                    setIsSaveStation={setIsSaveStation}
+                    setIsSave={setIsSave}
+                    setNotification={setNotification}
+                  />
                 </Grid>
                 <Grid item xs={12} md={7}>
-                  <ListStation />
+                  {isSaveStation ? (
+                    <Loading type="spin" color="rgb(41,130,235)" />
+                  ) : (
+                    <ListStation listStation={listStation} />
+                  )}
                 </Grid>
               </Grid>
-              <ListTrip tripInstances={tripInstances} />
+              {elemNoti()}
+              {isSave ? (
+                <Loading type="spin" color="rgb(41,130,235)" />
+              ) : (
+                <ListTrip
+                  tripInstances={tripInstances}
+                  setIsSave={setIsSave}
+                  setNotification={setNotification}
+                />
+              )}
             </MDBox>
           </Grid>
         </Grid>

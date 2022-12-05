@@ -8,7 +8,7 @@ import tabledatatrip from "layouts/tripInstance/data/tabledatatrip";
 import Item from "layouts/tripInstance/itemTrip";
 import { PropTypes } from "prop-types";
 
-function ListTrip({ tripInstances }) {
+function ListTrip({ tripInstances, setIsSave, setNotification }) {
   const { columns, rows } = tabledatatrip();
 
   return (
@@ -19,6 +19,7 @@ function ListTrip({ tripInstances }) {
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
+        <Item stt="STT" departure="Departure" arrival="Arrival" date="Date" time="Time" hide />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <DataTable
             table={{ columns, rows }}
@@ -28,14 +29,19 @@ function ListTrip({ tripInstances }) {
             noEndBorder
           />
           <MDBox mt="-40px">
-            {tripInstances.length > 1
+            {tripInstances.length > 0
               ? tripInstances.map((item, index) => (
                   <Item
                     stt={index + 1}
-                    departure={item.route.departure.nameStation}
-                    arrival={item.route.arrival.nameStation}
+                    departure={item.adminGetRouteResponse.route.departure.nameStation}
+                    arrival={item.adminGetRouteResponse.route.arrival.nameStation}
                     date={item.date}
                     time={item.timeStart}
+                    idTripInstance={item.id}
+                    idRoute={item.adminGetRouteResponse.route.id}
+                    hide={false}
+                    setIsSave={setIsSave}
+                    setNotification={setNotification}
                   />
                 ))
               : null}
@@ -48,6 +54,8 @@ function ListTrip({ tripInstances }) {
 
 ListTrip.propTypes = {
   tripInstances: PropTypes.arrayOf.isRequired,
+  setIsSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
 };
 
 export default ListTrip;

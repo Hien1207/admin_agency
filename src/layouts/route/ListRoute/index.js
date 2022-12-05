@@ -18,6 +18,15 @@ function ListRoute() {
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
+        <Item
+          stt="STT"
+          dep="Departure"
+          des="Destination"
+          quantity="Quantity"
+          station="Station"
+          time="Time"
+          hide
+        />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <DataTable
             table={{ columns, rows }}
@@ -34,6 +43,7 @@ function ListRoute() {
               quantity="1"
               station="Quy Nhơn"
               time="01:20:00"
+              hide={false}
             />
           </MDBox>
         </MDBox>
