@@ -34,7 +34,7 @@ function AddVehicle({ setClickSave, setNotification }) {
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
             Name
           </MDTypography>
-          <MDBox ml={4} width="70%">
+          <MDBox ml={3} width="70%">
             <TextField
               label="name"
               variant="outlined"
@@ -52,7 +52,7 @@ function AddVehicle({ setClickSave, setNotification }) {
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
             License Plate
           </MDTypography>
-          <MDBox ml={4} width="70%">
+          <MDBox ml={3} width="70%">
             <TextField
               label="licensePlate"
               variant="outlined"
@@ -68,11 +68,11 @@ function AddVehicle({ setClickSave, setNotification }) {
         </MDBox>
         <MDBox mb={2} display="flex">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-            Quantity seat
+            Quantity Seat
           </MDTypography>
-          <MDBox ml={4} width="70%">
+          <MDBox ml={3} width="70%">
             <TextField
-              label="quantityseat"
+              label="quantitySeat"
               variant="outlined"
               sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {
@@ -112,7 +112,7 @@ function AddVehicle({ setClickSave, setNotification }) {
               handleCreateVehicle();
             }}
           >
-            Lưu
+            Save
           </MDButton>
         </MDBox>
       </MDBox>

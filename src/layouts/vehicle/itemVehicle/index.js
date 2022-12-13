@@ -97,7 +97,7 @@ function ItemVehicle({
       ) : (
         <MDBox display="flex" alignItems="center" mt={-3} width="15%">
           <MDBox>
-            <MDButton variant="text" color="error">
+            <MDButton variant="text" color="error" disabled>
               <Icon>delete</Icon>&nbsp;delete
             </MDButton>
           </MDBox>

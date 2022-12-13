@@ -80,7 +80,11 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
                   id="date"
                   label="Select Date"
                   type="date"
-                  defaultValue="2022-12-02"
+                  // defaultValue="2022-12-02"
+                  required
+                  rules={{
+                    isRequired: true,
+                  }}
                   sx={{ width: "100%", mt: -1 }}
                   InputLabelProps={{
                     shrink: true,
@@ -103,7 +107,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
                   id="time"
                   label="Select Time"
                   type="time"
-                  defaultValue="03:30"
+                  // defaultValue="03:30"
                   sx={{ width: "100%", mt: -1 }}
                   InputLabelProps={{
                     shrink: true,

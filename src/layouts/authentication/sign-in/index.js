@@ -55,7 +55,6 @@ function Basic() {
   const [err, setErr] = useState("");
   const navigate = useNavigate();
   const handleLogin = () => {
-    // console.log(data);
     login(data, navigate, setErr);
   };
   return (

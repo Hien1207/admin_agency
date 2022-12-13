@@ -41,7 +41,7 @@ function ListVehicle(props) {
                 stt={index + 1}
                 name={item.nameVehicle}
                 licensePlate={item.licensePlate}
-                seatQuantity={item.seatQuantity.quantity}
+                seatQuantity={item.seatQuantity?.quantity}
                 status={item.status ? "true" : "false"}
                 key={item.id}
                 setClickSave={setClickSave}
