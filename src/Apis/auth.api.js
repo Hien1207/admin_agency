@@ -12,11 +12,11 @@ function login(Data, navigate, setErr) {
     .then((data) => {
       console.log(data);
       if (data.message) {
-        // console.log(data.message);
         setErr(data.message);
       } else {
         setLocalStorage(STORAGE.USER_DATA, JSON.stringify(data));
         setLocalStorage(STORAGE.USER_TOKEN, data.accessToken);
+        setLocalStorage("EXPIRE", JSON.stringify(new Date()));
         navigate("/admin/dashboard");
       }
     })
@@ -55,7 +55,7 @@ function logout(navigate) {
     .then(() => {
       removeLocalStorage(STORAGE.USER_DATA);
       removeLocalStorage(STORAGE.USER_TOKEN);
-      removeLocalStorage("POSITION");
+      removeLocalStorage("EXPIRE");
       navigate("/authentication/sign-in");
     })
     .catch((err) => {

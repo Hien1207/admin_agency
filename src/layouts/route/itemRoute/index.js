@@ -27,47 +27,100 @@ import MDButton from "components/MDButton";
 // Material Dashboard 2 React context
 import { useMaterialUIController } from "context";
 import * as React from "react";
+import Dialog from "@mui/material/Dialog";
+// import DialogActions from "@mui/material/DialogActions";
+import DialogTitle from "@mui/material/DialogTitle";
+// import { Button } from "@mui/material";
+import { deleteRoute } from "Apis/route.api";
+import UpdateRoute from "../UpdateRoute";
 
-function ItemRoute({ stt, dep, des, quantity, station, time, hide }) {
+function ItemRoute({
+  stt,
+  dep,
+  des,
+  quantity,
+  station,
+  time,
+  hide,
+  listStation,
+  idRoute,
+  setIsSave,
+  setNotification,
+}) {
   const [controller] = useMaterialUIController();
   const { darkMode } = controller;
-
+  const [open, setOpen] = React.useState(false);
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const handleDeleleRoute = () => {
+    deleteRoute(idRoute, setIsSave, setNotification);
+  };
   return (
-    <MDBox pl={3} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
+    <MDBox pl={2} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
       <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
         {stt}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={8} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="13%">
         {dep}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="13%">
         {des}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="7%">
         {quantity}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="24%">
         {station}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={0} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={4} width="10%">
         {time}
       </MDTypography>
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={-2} width="30%">
+        <MDBox display="flex" alignItems="center" mt={-2} width="10%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={-2} width="30%">
-          <MDBox mr={2} ml={2}>
-            <MDButton variant="text" color="error">
+        <MDBox display="flex" alignItems="center" mt={-2} width="10%">
+          <MDBox mr={1} ml={1}>
+            <MDButton
+              variant="text"
+              color="error"
+              onClick={() => {
+                handleDeleleRoute();
+              }}
+            >
               <Icon>delete</Icon>&nbsp;delete
             </MDButton>
           </MDBox>
-          <MDButton variant="text" color={darkMode ? "white" : "dark"}>
+          <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
             <Icon>edit</Icon>&nbsp;edit
           </MDButton>
         </MDBox>
       )}
+      <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
+        <DialogTitle ml="43%">Update</DialogTitle>
+        <UpdateRoute
+          listStation={listStation}
+          handleClose={handleClose}
+          idRoute={idRoute}
+          setIsSave={setIsSave}
+          setNotification={setNotification}
+        />
+        {/* <DialogActions>
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
+            onClick={() => {
+              handleClose();
+            }}
+          >
+            Update
+          </Button>
+        </DialogActions> */}
+      </Dialog>
     </MDBox>
   );
 }
@@ -80,6 +133,10 @@ ItemRoute.propTypes = {
   station: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
   hide: PropTypes.bool.isRequired,
+  listStation: PropTypes.arrayOf.isRequired,
+  idRoute: PropTypes.number.isRequired,
+  setIsSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
 };
 
 export default ItemRoute;

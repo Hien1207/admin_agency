@@ -21,6 +21,7 @@ const routes = [
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/admin/dashboard",
     component: <Dashboard />,
+    permission: "login",
   },
   {
     type: "collapse",
@@ -29,6 +30,7 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/vehicle",
     component: <Vehicle />,
+    permission: "login",
   },
   {
     type: "collapse",
@@ -37,6 +39,7 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/route",
     component: <Route />,
+    permission: "login",
   },
   {
     type: "collapse",
@@ -45,6 +48,7 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/tripInstance",
     component: <TripInstance />,
+    permission: "login",
   },
   {
     type: "collapse",
@@ -61,6 +65,7 @@ const routes = [
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/history",
     component: <HistoryBooking />,
+    permission: "login",
   },
   {
     type: "collapse",
@@ -77,6 +82,7 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/admin/profile",
     component: <Profile />,
+    permission: "login",
   },
   {
     type: "collapse",
@@ -85,6 +91,7 @@ const routes = [
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",
     component: <SignIn />,
+    permission: "",
   },
   {
     type: "collapse",
@@ -93,6 +100,7 @@ const routes = [
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-up",
     component: <SignUp />,
+    permission: "",
   },
 ];
 

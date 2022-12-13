@@ -53,6 +53,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 import * as Sentry from "@sentry/react";
+import { STORAGE } from "Utils/storage";
 
 export default function App() {
   try {
@@ -84,6 +85,7 @@ export default function App() {
       });
 
       setRtlCache(cacheRtl);
+      // console.log(Date.parse(JSON.parse(localStorage.getItem("EXPIRE"))));
     }, []);
 
     // Open sidenav when mouse enter on mini sidenav
@@ -115,20 +117,35 @@ export default function App() {
       document.documentElement.scrollTop = 0;
       document.scrollingElement.scrollTop = 0;
     }, [pathname]);
-
-    const getRoutes = (allRoutes) =>
+    const getRoutesPublic = (allRoutes) =>
       allRoutes.map((route) => {
-        if (route.collapse) {
-          return getRoutes(route.collapse);
-        }
-
-        if (route.route) {
+        if (!route.permission) {
           return <Route exact path={route.route} element={route.component} key={route.key} />;
         }
 
         return null;
       });
 
+    const getRoutes = (allRoutes) =>
+      allRoutes.map((route) => {
+        if (route.route && route.permission) {
+          return <Route exact path={route.route} element={route.component} key={route.key} />;
+        }
+
+        return null;
+      });
+    const elemDefault = () => {
+      let res = null;
+      if (
+        !localStorage.getItem(STORAGE.USER_TOKEN) ||
+        new Date().valueOf() - Date.parse(JSON.parse(localStorage.getItem("EXPIRE")) > 86400000)
+      ) {
+        res = <Route path="*" element={<Navigate to="/authentication/sign-in" />} />;
+      } else {
+        res = <Route path="*" element={<Navigate to="/admin/dashboard" />} />;
+      }
+      return res;
+    };
     const configsButton = (
       <MDBox
         display="flex"
@@ -162,7 +179,7 @@ export default function App() {
               <Sidenav
                 color={sidenavColor}
                 brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-                brandName="Admin"
+                brandName="Agency Vehicle"
                 routes={routes}
                 onMouseEnter={handleOnMouseEnter}
                 onMouseLeave={handleOnMouseLeave}
@@ -186,7 +203,7 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Admin"
+              brandName="Agency Vehicle"
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
@@ -197,8 +214,19 @@ export default function App() {
         )}
         {layout === "vr" && <Configurator />}
         <Routes>
-          {getRoutes(routes)}
-          <Route path="*" element={<Navigate to="/admin/dashboard" />} />
+          {/* {getRoutes(routes)}
+          <Route path="*" element={<Navigate to="/admin/dashboard" />} /> */}
+          {!localStorage.getItem(STORAGE.USER_TOKEN) ||
+          new Date().valueOf() - Date.parse(JSON.parse(localStorage.getItem("EXPIRE")) > 86400000)
+            ? getRoutesPublic(routes)
+            : null}
+
+          {localStorage.getItem(STORAGE.USER_TOKEN) &&
+          new Date().valueOf() - Date.parse(JSON.parse(localStorage.getItem("EXPIRE"))) < 86400000
+            ? getRoutes(routes)
+            : null}
+          {/* {getRoutes(routes)} */}
+          {elemDefault()}
         </Routes>
       </ThemeProvider>
     );

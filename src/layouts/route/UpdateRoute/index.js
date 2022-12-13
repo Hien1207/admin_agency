@@ -7,18 +7,16 @@ import TextField from "@mui/material/TextField";
 import MDButton from "components/MDButton";
 import * as React from "react";
 import { PropTypes } from "prop-types";
-import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
+import { FormControl, InputLabel, Select, MenuItem, Button } from "@mui/material";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
-import { createRouteStation } from "Apis/route.api";
+import { getRouteStationById } from "Apis/route.api";
 
-function AddRoute({ listStation, setIsSave, setNotification }) {
+function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotification }) {
   const [numberStation, setNumberStation] = React.useState(0);
   const [isRemoveFirst, setIsRemoveFirst] = React.useState(false);
-  const [time1, setTime1] = React.useState("");
-  const [time2, setTime2] = React.useState("");
-  const [time3, setTime3] = React.useState("");
+  const [stationById, setStationById] = React.useState({});
 
-  const [dataAddRoute, setDataAddRoute] = React.useState({
+  const [dataUpdate, setDataUpdate] = React.useState({
     descriptionDep: "",
     descriptionDes: "",
     descriptionStation1: "",
@@ -27,71 +25,70 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
     idDes: 0,
     idStation1: 0,
     idStation2: 0,
-    quantityStation: numberStation,
+    idRoute: 0,
+    listIdRouteStation: [],
     time: [],
   });
 
-  // const getNameStationById = (id) => {
-  //   let name = null;
-  //   for (let i = 0; i < listStation.length; i += 1) {
-  //     if (listStation[i].id === id) {
-  //       name = listStation[i].nameStation;
-  //       break;
-  //     }
-  //   }
-  //   return name;
-  // };
-
-  const handleCreateRoute = () => {
-    let requestObject = {
-      ...dataAddRoute,
-    };
-    if (numberStation === 0) {
+  React.useEffect(() => {
+    getRouteStationById(idRoute, setStationById, setIsSave, setNotification, setNumberStation);
+  }, []);
+  React.useEffect(() => {
+    let requestObject = {};
+    // setNumberStation(stationById.routeStationList?.length - 1);
+    if (stationById.routeStationList?.length === 3) {
       requestObject = {
-        descriptionDep: dataAddRoute.descriptionDep,
-        descriptionDes: dataAddRoute.descriptionDes,
-        idDep: dataAddRoute.idDep,
-        idDes: dataAddRoute.idDes,
-        quantityStation: numberStation,
-        time: [time1],
+        descriptionDep: stationById.routeStationList[0].stationP.nameStation,
+        descriptionDes: stationById.routeStationList[2].stationS.nameStation,
+        descriptionStation1: stationById.routeStationList[1].stationP.nameStation,
+        descriptionStation2: stationById.routeStationList[1].stationS.nameStation,
+        idDep: stationById.route.departure.id,
+        idDes: stationById.route.arrival.id,
+        idStation1: stationById.routeStationList[1].stationP.id,
+        idStation2: stationById.routeStationList[1].stationS.id,
+        idRoute,
+        listIdRouteStation: [
+          stationById.routeStationList[1].stationP.id,
+          stationById.routeStationList[1].stationS.id,
+        ],
+        time: [
+          stationById.routeStationList[2].time,
+          stationById.routeStationList[1].time,
+          stationById.routeStationList[1].time,
+        ],
       };
-    } else if (numberStation === 1 && isRemoveFirst) {
+    } else if (stationById.routeStationList?.length === 2) {
       requestObject = {
-        descriptionDep: dataAddRoute.descriptionDep,
-        descriptionDes: dataAddRoute.descriptionDes,
-        idDep: dataAddRoute.idDep,
-        idDes: dataAddRoute.idDes,
-        quantityStation: numberStation,
-        descriptionStation1: dataAddRoute.descriptionStation2,
-        idStation1: dataAddRoute.idStation2,
-        time: [time3, time1],
+        descriptionDep: stationById.routeStationList[0].stationP.nameStation,
+        descriptionDes: stationById.routeStationList[1].stationS.nameStation,
+        descriptionStation1: stationById.routeStationList[0].stationS.nameStation,
+        idDep: stationById.route.departure.id,
+        idDes: stationById.route.arrival.id,
+        idStation1: stationById.routeStationList[0].stationS.id,
+        idRoute,
+        listIdRouteStation: [stationById.routeStationList[0].stationS.id],
+        time: [stationById.routeStationList[1].time, stationById.routeStationList[0].time],
       };
-    } else if (numberStation === 1 && !isRemoveFirst) {
+    } else if (stationById.routeStationList?.length === 1) {
       requestObject = {
-        descriptionDep: dataAddRoute.descriptionDep,
-        descriptionDes: dataAddRoute.descriptionDes,
-        idDep: dataAddRoute.idDep,
-        idDes: dataAddRoute.idDes,
-        quantityStation: numberStation,
-        descriptionStation1: dataAddRoute.descriptionStation1,
-        idStation1: dataAddRoute.idStation1,
-        time: [time2, time1],
-      };
-    } else {
-      requestObject = {
-        ...dataAddRoute,
-        quantityStation: numberStation,
-        time: [time2, time3, time1],
+        descriptionDep: stationById.routeStationList[0].stationP.nameStation,
+        descriptionDes: stationById.routeStationList[0].stationS.nameStation,
+        idDep: stationById.route.departure.id,
+        idDes: stationById.route.arrival.id,
+        idRoute,
+        listIdRouteStation: [],
+        time: [stationById.routeStationList[0].time],
       };
     }
     // console.log(requestObject);
-    createRouteStation(requestObject, setIsSave, setNotification);
-  };
+    setDataUpdate(requestObject);
+  }, [stationById]);
+
   return (
-    <Card sx={{ height: "100%", width: "100%", mb: 4 }}>
-      <MDBox display="flex" pt={3} px={4}>
+    <Card sx={{ height: "100%", width: "100%" }}>
+      <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={2} px={4}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Add Route
+          Update Route
         </MDTypography>
       </MDBox>
       <MDBox mt={3} pb={2} px={4}>
@@ -117,10 +114,10 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
                     label="Departure"
-                    value={dataAddRoute.idDep}
+                    value={dataUpdate.idDep}
                     onChange={(e) => {
-                      setDataAddRoute({
-                        ...dataAddRoute,
+                      setDataUpdate({
+                        ...dataUpdate,
                         idDep: e.target.value,
                       });
                     }}
@@ -142,9 +139,10 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                 <TextField
                   variant="outlined"
                   sx={{ mt: -1, width: "100%" }}
+                  value={dataUpdate.descriptionDep}
                   onChange={(e) => {
-                    setDataAddRoute({
-                      ...dataAddRoute,
+                    setDataUpdate({
+                      ...dataUpdate,
                       descriptionDep: e.target.value,
                     });
                   }}
@@ -154,17 +152,17 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
           </MDBox>
         </MDBox>
         <MDBox
-          mb={6}
-          mt={1}
+          mb={4}
+          mt={3}
           display="flex"
           width="100%"
           justifyContent="flex-start"
           alignItems="center"
         >
-          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="10%">
+          <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="15%">
             RouteStation
           </MDTypography>
-          <MDBox mt={0} mb={0} ml={4} width="20%">
+          <MDBox mt={0} mb={0} ml={0} width="20%">
             <MDButton
               component=""
               to="/admin/dashboard"
@@ -192,8 +190,8 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               type="number"
               sx={{ mt: -1, width: "24ch" }}
               onChange={(e) => {
-                setDataAddRoute({
-                  ...dataAddRoute,
+                setDataUpdate({
+                  ...dataUpdate,
                   quantityStation: e.target.value,
                 });
               }}
@@ -201,7 +199,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
           </MDBox> */}
         </MDBox>
         {(numberStation === 1 && !isRemoveFirst) || numberStation === 2 ? (
-          <MDBox mb={5} mt={2} display="flex" width="100%" alignItems="center">
+          <MDBox mb={2} mt={4} display="flex" width="100%" alignItems="center">
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
               station 1:
             </MDTypography>
@@ -218,10 +216,11 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Station 1"
-                  value={dataAddRoute.idStation1}
+                  defaultValue={0}
+                  value={dataUpdate.idStation1}
                   onChange={(e) => {
-                    setDataAddRoute({
-                      ...dataAddRoute,
+                    setDataUpdate({
+                      ...dataUpdate,
                       idStation1: e.target.value,
                     });
                   }}
@@ -243,9 +242,10 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               <TextField
                 variant="outlined"
                 sx={{ mt: 0, width: "100%" }}
+                value={dataUpdate.descriptionStation1}
                 onChange={(e) => {
-                  setDataAddRoute({
-                    ...dataAddRoute,
+                  setDataUpdate({
+                    ...dataUpdate,
                     descriptionStation1: e.target.value,
                   });
                 }}
@@ -260,16 +260,22 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                 label="Select Time"
                 type="time"
                 // defaultValue="03:30"
+                // value={dataUpdate.time[0]}
                 sx={{ width: 200, mt: -1 }}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 onChange={(e) => {
-                  setTime2(`${e.target.value}:00`);
+                  const arrTime = [...dataUpdate.time];
+                  arrTime[0] = `${e.target.value}:00`;
+                  setDataUpdate({
+                    ...dataUpdate,
+                    time: arrTime,
+                  });
                 }}
               />
             </MDBox>
-            <MDBox mt={0} mb={1} ml={4} width="10%" alignSelf="flex-end">
+            <MDBox mt={0} mb={1} ml={5} width="10%">
               <HighlightOffRoundedIcon
                 style={{
                   // fontSize: 40,
@@ -288,7 +294,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
         ) : null}
 
         {numberStation === 2 || (numberStation === 1 && isRemoveFirst) ? (
-          <MDBox mb={5} mt={4} display="flex" width="100%" alignItems="center">
+          <MDBox mb={3} mt={3} display="flex" width="100%" alignItems="center">
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
               station 2:
             </MDTypography>
@@ -305,11 +311,11 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
                   label="Station 2"
-                  // defaultValue={1}
-                  value={dataAddRoute.idStation2}
+                  defaultValue={0}
+                  value={dataUpdate.idStation2}
                   onChange={(e) => {
-                    setDataAddRoute({
-                      ...dataAddRoute,
+                    setDataUpdate({
+                      ...dataUpdate,
                       idStation2: e.target.value,
                     });
                   }}
@@ -331,9 +337,10 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               <TextField
                 variant="outlined"
                 sx={{ mt: -1, width: "100%" }}
+                value={dataUpdate.descriptionStation2}
                 onChange={(e) => {
-                  setDataAddRoute({
-                    ...dataAddRoute,
+                  setDataUpdate({
+                    ...dataUpdate,
                     descriptionStation2: e.target.value,
                   });
                 }}
@@ -349,15 +356,21 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                 type="time"
                 // defaultValue="03:30"
                 sx={{ width: 200, mt: -1 }}
+                // value={dataUpdate.time[1]}
                 InputLabelProps={{
                   shrink: true,
                 }}
                 onChange={(e) => {
-                  setTime3(`${e.target.value}:00`);
+                  const arrTime = [...dataUpdate.time];
+                  arrTime[1] = `${e.target.value}:00`;
+                  setDataUpdate({
+                    ...dataUpdate,
+                    time: arrTime,
+                  });
                 }}
               />
             </MDBox>
-            <MDBox mt={0} mb={1} ml={4} width="10%">
+            <MDBox mt={0} mb={1} ml={5} width="10%">
               <HighlightOffRoundedIcon
                 style={{
                   // fontSize: 40,
@@ -374,13 +387,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
             </MDBox>
           </MDBox>
         ) : null}
-        <MDBox
-          mb={2}
-          display="flex"
-          width="100%"
-          alignItems="center"
-          // ml="13%"
-        >
+        <MDBox mb={2} display="flex" width="100%" alignItems="center">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
             Destination:
           </MDTypography>
@@ -397,11 +404,11 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                 labelId="demo-simple-select-label"
                 id="demo-simple-select"
                 label="Departure"
-                // defaultValue={2}
-                value={dataAddRoute.idDes}
+                defaultValue={0}
+                value={dataUpdate.idDes}
                 onChange={(e) => {
-                  setDataAddRoute({
-                    ...dataAddRoute,
+                  setDataUpdate({
+                    ...dataUpdate,
                     idDes: e.target.value,
                   });
                 }}
@@ -422,10 +429,12 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
           <MDBox ml={1} width="30%">
             <TextField
               variant="outlined"
+              type="text"
               sx={{ mt: -1, width: "100%" }}
+              value={dataUpdate.descriptionDes}
               onChange={(e) => {
-                setDataAddRoute({
-                  ...dataAddRoute,
+                setDataUpdate({
+                  ...dataUpdate,
                   descriptionDes: e.target.value,
                 });
               }}
@@ -441,40 +450,52 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               type="time"
               // defaultValue="03:30"
               sx={{ width: 200, mt: -1 }}
+              // value={dataUpdate.time[0]}
               InputLabelProps={{
                 shrink: true,
               }}
               onChange={(e) => {
-                setTime1(`${e.target.value}:00`);
+                const arrTime = [...dataUpdate.time];
+                arrTime[0] = `${e.target.value}:00`;
+                setDataUpdate({
+                  ...dataUpdate,
+                  time: arrTime,
+                });
               }}
             />
           </MDBox>
-          <MDBox mt={0} mb={1} ml={4} width="10%">
+          <MDBox mt={0} mb={1} ml={5} width="10%">
             {null}
           </MDBox>
         </MDBox>
-
-        <MDBox mt={4} mb={2} ml="90%" width="50px">
-          <MDButton
-            component=""
-            to="/admin/dashboard"
-            variant="gradient"
-            fullWidth
-            color="info"
+        <MDBox
+          mt={4}
+          mb={2}
+          ml="80%"
+          width="20%"
+          display="flex"
+          // justifyContent="flex-end"
+          // alignContent="center"
+          // alignItems="center"
+        >
+          <Button onClick={handleClose}>Cancel</Button>
+          <Button
             onClick={() => {
-              handleCreateRoute();
+              handleClose();
             }}
           >
-            Save
-          </MDButton>
+            Update
+          </Button>
         </MDBox>
       </MDBox>
     </Card>
   );
 }
-AddRoute.propTypes = {
+UpdateRoute.propTypes = {
   listStation: PropTypes.arrayOf.isRequired,
+  handleClose: PropTypes.func.isRequired,
+  idRoute: PropTypes.number.isRequired,
   setIsSave: PropTypes.func.isRequired,
   setNotification: PropTypes.func.isRequired,
 };
-export default AddRoute;
+export default UpdateRoute;

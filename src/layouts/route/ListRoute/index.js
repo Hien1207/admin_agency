@@ -6,8 +6,9 @@ import MDTypography from "components/MDTypography";
 import DataTable from "examples/Tables/DataTable";
 import authorsTableData from "layouts/route/data/authorsTableData";
 import Item from "layouts/route/itemRoute";
+import { PropTypes } from "prop-types";
 
-function ListRoute() {
+function ListRoute({ listRoute, listStation, setIsSave, setNotification }) {
   const { columns, rows } = authorsTableData();
 
   return (
@@ -36,20 +37,50 @@ function ListRoute() {
             noEndBorder
           />
           <MDBox mt="-40px">
-            <Item
-              stt="1"
-              dep="Đà Nẵng"
-              des="Hồ Chí Minh"
-              quantity="1"
-              station="Quy Nhơn"
-              time="01:20:00"
-              hide={false}
-            />
+            {listRoute?.map((item, index) => (
+              <Item
+                stt={index + 1}
+                dep={item.route.departure?.nameStation}
+                des={item.route.arrival?.nameStation}
+                quantity={item.routeStationList.length - 1}
+                station={item.routeStationList
+                  .slice(0, item.routeStationList.length - 1)
+                  .map((itemRouteStation, indexIn) => {
+                    if (
+                      indexIn ===
+                      item.routeStationList.slice(0, item.routeStationList.length - 1).length - 1
+                    ) {
+                      return `${itemRouteStation.stationS?.nameStation}`;
+                    }
+                    return `${itemRouteStation.stationS?.nameStation}, `;
+                  })}
+                // time={item.routeStationList.map((itemRouteStation, indexIn) => {
+                //   if (
+                //     indexIn ===
+                //     item.routeStationList.slice(0, item.routeStationList.length - 1).length - 1
+                //   ) {
+                //     return `${itemRouteStation.stationS.nameStation}`;
+                //   }
+                //   return `${itemRouteStation.stationS.nameStation}, `;
+                // })}
+                time="04:00"
+                idRoute={item.route.id}
+                hide={false}
+                listStation={listStation}
+                setIsSave={setIsSave}
+                setNotification={setNotification}
+              />
+            ))}
           </MDBox>
         </MDBox>
       </MDBox>
     </Card>
   );
 }
-
+ListRoute.propTypes = {
+  listRoute: PropTypes.arrayOf.isRequired,
+  listStation: PropTypes.arrayOf.isRequired,
+  setIsSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
+};
 export default ListRoute;
