@@ -16,7 +16,7 @@ import Icon from "@mui/material/Icon";
 const routes = [
   {
     type: "collapse",
-    name: "Dashboard",
+    name: "Trang chủ",
     key: "admin/dashboard",
     icon: <Icon fontSize="small">dashboard</Icon>,
     route: "/admin/dashboard",
@@ -25,7 +25,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Manage vehicles",
+    name: "Quản lý xe",
     key: "admin/vehicle",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/vehicle",
@@ -34,7 +34,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Manage routes",
+    name: "Quản lý tuyến",
     key: "admin/route",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/route",
@@ -43,7 +43,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Manage TripInstance",
+    name: "Quản lý thời gian chuyến đi",
     key: "admin/tripInstance",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/tripInstance",
@@ -52,15 +52,16 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Manage Trip",
+    name: "Quản lý chuyến",
     key: "admin/trip",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/trip",
     component: <Trip />,
+    permission: "login",
   },
   {
     type: "collapse",
-    name: "History booking",
+    name: "Quản lý vé",
     key: "admin/history",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/history",
@@ -69,15 +70,16 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Revenue",
+    name: "Doanh thu",
     key: "admin/revenue",
     icon: <Icon fontSize="small">receipt_long</Icon>,
     route: "/admin/revenue",
     component: <Revenue />,
+    permission: "login",
   },
   {
     type: "collapse",
-    name: "Profile",
+    name: "Thông tin cá nhân",
     key: "admin/profile",
     icon: <Icon fontSize="small">person</Icon>,
     route: "/admin/profile",
@@ -86,7 +88,7 @@ const routes = [
   },
   {
     type: "collapse",
-    name: "Logout",
+    name: "Đăng xuất",
     key: "sign-in",
     icon: <Icon fontSize="small">login</Icon>,
     route: "/authentication/sign-in",

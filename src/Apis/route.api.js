@@ -57,7 +57,7 @@ const getRouteStationById = (
     .then((res) => res.data)
     .then((data) => {
       // console.log(data);
-      setStationById(data);
+      setStationById(data.routeStationList);
       setIsSave(false);
       setNumberStation(data.routeStationList.length - 1);
     })

@@ -113,7 +113,7 @@ function ItemVehicle({
             autoFocus
             margin="dense"
             id="name"
-            label="name"
+            label="tên"
             type="text"
             fullWidth
             variant="standard"
@@ -130,7 +130,7 @@ function ItemVehicle({
             autoFocus
             margin="dense"
             id="name"
-            label="licensePlate"
+            label="biển số xe"
             type="text"
             fullWidth
             variant="standard"
@@ -147,7 +147,7 @@ function ItemVehicle({
             autoFocus
             margin="dense"
             id="name"
-            label="quantityseat"
+            label="số lượng ghế"
             type="text"
             fullWidth
             variant="standard"

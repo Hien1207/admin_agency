@@ -79,7 +79,7 @@ function Vehicle() {
               marginBottom="2rem"
             >
               <MDTypography variant="h6" color="white">
-                Manage vehicles
+                Quản lý xe
               </MDTypography>
             </MDBox>
             {elemNoti()}

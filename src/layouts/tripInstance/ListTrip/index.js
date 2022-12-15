@@ -15,11 +15,18 @@ function ListTrip({ tripInstances, setIsSave, setNotification }) {
     <Card id="delete-account">
       <MDBox pt={3} px={2}>
         <MDTypography variant="h6" fontWeight="medium" ml={2}>
-          List TripInstance
+          Danh sách
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
-        <Item stt="STT" departure="Departure" arrival="Arrival" date="Date" time="Time" hide />
+        <Item
+          stt="STT"
+          departure="Điểm đi"
+          arrival="Điểm đến"
+          date="Ngày khởi hành"
+          time="Thời gian khởi hành"
+          hide
+        />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <DataTable
             table={{ columns, rows }}

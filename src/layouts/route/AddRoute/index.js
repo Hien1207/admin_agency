@@ -91,18 +91,18 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
     <Card sx={{ height: "100%", width: "100%", mb: 4 }}>
       <MDBox display="flex" pt={3} px={4}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Add Route
+          Thêm tuyến
         </MDTypography>
       </MDBox>
       <MDBox mt={3} pb={2} px={4}>
         <MDBox mb={2} display="flex" width="100%">
           <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="10%">
-            Route
+            Tuyến
           </MDTypography>
           <MDBox ml={4} mt={1} width="90%" display="block">
             <MDBox mb={2} display="flex" width="100%" alignItems="center">
               <MDTypography variant="caption" color="text" fontWeight="bold" width="20%">
-                Departure:
+                Điểm đi:
               </MDTypography>
               <MDBox ml={0} width="40%">
                 <FormControl
@@ -136,7 +136,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                 </FormControl>
               </MDBox>
               <MDTypography variant="caption" color="text" fontWeight="bold" width="20%" ml={8}>
-                Description:
+                Mô tả:
               </MDTypography>
               <MDBox ml={0} width="40%">
                 <TextField
@@ -162,7 +162,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
           alignItems="center"
         >
           <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize" width="10%">
-            RouteStation
+            Trạm
           </MDTypography>
           <MDBox mt={0} mb={0} ml={4} width="20%">
             <MDButton
@@ -180,11 +180,11 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                 }
               }}
             >
-              Add station
+              THêm trạm
             </MDButton>
           </MDBox>
           <MDTypography variant="caption" color="text" fontWeight="bold" width="35%" mt={0} ml={2}>
-            Add quantity station for route (max 2 stations)
+            Thêm trạm cho tuyến (tối đa 2 trạm)
           </MDTypography>
           {/* <MDBox ml={3.8} width="70%">
             <TextField
@@ -203,7 +203,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
         {(numberStation === 1 && !isRemoveFirst) || numberStation === 2 ? (
           <MDBox mb={5} mt={2} display="flex" width="100%" alignItems="center">
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
-              station 1:
+              Trạm 1:
             </MDTypography>
             <MDBox ml={1} width="20%">
               <FormControl
@@ -237,7 +237,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               </FormControl>
             </MDBox>
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={4}>
-              description:
+              mô tả:
             </MDTypography>
             <MDBox ml={1} width="30%">
               <TextField
@@ -252,7 +252,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               />
             </MDBox>
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={5}>
-              time:
+              thời gian:
             </MDTypography>
             <MDBox ml={0} width="15%">
               <TextField
@@ -290,7 +290,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
         {numberStation === 2 || (numberStation === 1 && isRemoveFirst) ? (
           <MDBox mb={5} mt={4} display="flex" width="100%" alignItems="center">
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
-              station 2:
+              Trạm 2:
             </MDTypography>
             <MDBox ml={1} width="20%">
               <FormControl
@@ -300,7 +300,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                   height: 40,
                 }}
               >
-                <InputLabel id="demo-simple-select-label">Station 2</InputLabel>
+                <InputLabel id="demo-simple-select-label">Trạm 2</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
@@ -325,7 +325,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               </FormControl>
             </MDBox>
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={4}>
-              description:
+              mô tả:
             </MDTypography>
             <MDBox ml={1} width="30%">
               <TextField
@@ -340,7 +340,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               />
             </MDBox>
             <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={5}>
-              time:
+              thời gian:
             </MDTypography>
             <MDBox ml={0} width="15%">
               <TextField
@@ -382,7 +382,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
           // ml="13%"
         >
           <MDTypography variant="caption" color="text" fontWeight="bold" width="10%">
-            Destination:
+            Điểm đến:
           </MDTypography>
           <MDBox ml={1} width="20%">
             <FormControl
@@ -417,7 +417,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
             </FormControl>
           </MDBox>
           <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={4}>
-            Description:
+            mô tả:
           </MDTypography>
           <MDBox ml={1} width="30%">
             <TextField
@@ -432,7 +432,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
             />
           </MDBox>
           <MDTypography variant="caption" color="text" fontWeight="bold" width="10%" ml={5}>
-            time:
+            thời gian:
           </MDTypography>
           <MDBox ml={0} width="15%">
             <TextField

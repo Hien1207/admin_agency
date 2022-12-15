@@ -19,7 +19,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="assignment"
-                title="Vehicle"
+                title="Xe"
                 count="+7"
                 percentage={{
                   color: "success",
@@ -33,7 +33,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 icon="cottage"
-                title="Route"
+                title="Tuyến"
                 count="+50"
                 percentage={{
                   color: "success",
@@ -48,7 +48,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="dark"
                 icon="assignment"
-                title="Trip"
+                title="Chuyến"
                 count="+12"
                 percentage={{
                   color: "success",
@@ -63,7 +63,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="success"
                 icon="groups"
-                title="HistoryBooking"
+                title="Vé"
                 count="+150"
                 percentage={{
                   color: "success",
@@ -78,7 +78,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="groups"
-                title="Revenue"
+                title="Doang thu"
                 count="+2000"
                 percentage={{
                   color: "success",
