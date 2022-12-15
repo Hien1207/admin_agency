@@ -24,7 +24,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
     <Card sx={{ height: "370px", mb: 4 }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={4}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Add TripInstance
+          Thêm
         </MDTypography>
       </MDBox>
       <MDBox mt={3} pb={2} px={4}>
@@ -35,7 +35,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
           <MDBox ml={0} mt={1} width="22rem" display="block">
             <MDBox mb={2} display="flex">
               <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-                route
+                Tuyến
               </MDTypography>
               <MDBox ml={0} width="70%">
                 <FormControl
@@ -73,7 +73,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
             </MDBox>
             <MDBox mb={2} mt={4} display="flex">
               <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-                date
+                Ngày khởi hành
               </MDTypography>
               <MDBox ml={0} width="70%">
                 <TextField
@@ -100,7 +100,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
             </MDBox>
             <MDBox mb={2} mt={4} display="flex">
               <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-                time start
+                Thời gian khởi hành
               </MDTypography>
               <MDBox ml={0} width="70%">
                 <TextField

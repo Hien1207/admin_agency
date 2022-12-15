@@ -15,16 +15,16 @@ function ListVehicle(props) {
     <Card id="delete-account">
       <MDBox pt={3} px={2}>
         <MDTypography variant="h6" fontWeight="medium" ml={2}>
-          List vehicle
+          Danh sách xe
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <Item
           stt="STT"
-          name="Name"
-          licensePlate="License Plate"
-          seatQuantity="Quantity seat"
-          status="Status"
+          name="Tên"
+          licensePlate="BIển số xe"
+          seatQuantity="Số lượng ghế"
+          status="Trạng thái"
           hide
         />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>

@@ -10,22 +10,32 @@ function data() {
     columns: [{
       Header: "stt",
       accessor: "stt",
-      width: "10%",
+      width: "5%",
       align: "left"
     }, {
-      Header: "Điểm đi",
+      Header: "điểm đi",
       accessor: "dep",
-      width: "30%",
+      width: "15%",
       align: "left"
     }, {
-      Header: "Điểm đến",
+      Header: "điểm đến",
       accessor: "des",
-      width: "30%",
+      width: "15%",
       align: "left"
     }, {
-      Header: "Thời gian",
+      Header: "số lượng ghế",
+      accessor: "quantity",
+      width: "15%",
+      align: "left"
+    }, {
+      Header: "trạm",
+      accessor: "station",
+      width: "15%",
+      align: "left"
+    }, {
+      Header: "thời gian",
       accessor: "time",
-      width: "30%",
+      width: "25%",
       align: "left"
     }],
     rows: []

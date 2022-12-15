@@ -15,11 +15,11 @@ function ListStation({ listStation }) {
     <Card id="delete-account" sx={{ height: "370px", mb: 4 }}>
       <MDBox pt={3} px={2}>
         <MDTypography variant="h6" fontWeight="medium" ml={2}>
-          List Station
+          Danh sách trạm
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
-        <Item stt="STT" dep="Departure" des="Arrival" time="Time" />
+        <Item stt="STT" dep="Điểm đi" des="Điểm đến" time="Thời gian" />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <DataTable
             table={{ columns, rows }}
@@ -39,9 +39,6 @@ function ListStation({ listStation }) {
                   />
                 ))
               : null}
-            <MDTypography variant="h6" fontWeight="medium" ml={5} mt={3} fullWidth>
-              View các trạm ra ứng với mỗi route được chọn
-            </MDTypography>
           </MDBox>
         </MDBox>
       </MDBox>

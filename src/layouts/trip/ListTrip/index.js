@@ -14,7 +14,7 @@ function ListTrip() {
     <Card id="delete-account">
       <MDBox pt={3} px={2}>
         <MDTypography variant="h6" fontWeight="medium" ml={2}>
-          List Trip
+          Danh sách chuyến
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>

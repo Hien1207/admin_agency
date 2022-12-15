@@ -12,7 +12,7 @@ function AddTrip() {
     <Card sx={{ height: "480px", mb: 4 }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={4}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Add Trip
+          Thêm chuyến
         </MDTypography>
       </MDBox>
       <MDBox mt={3} pb={2} px={4}>

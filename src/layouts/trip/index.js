@@ -29,7 +29,7 @@ function Trip() {
               marginBottom="2rem"
             >
               <MDTypography variant="h6" color="white">
-                Manage Trips
+                Quản lý chuyến
               </MDTypography>
             </MDBox>
             <MDBox mb={3} display="block">

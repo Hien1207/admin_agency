@@ -27,7 +27,7 @@ function HistoryBooking() {
               marginBottom="2rem"
             >
               <MDTypography variant="h6" color="white">
-                Manage HistoryBooking
+                Quản lý vé
               </MDTypography>
             </MDBox>
           </Grid>
