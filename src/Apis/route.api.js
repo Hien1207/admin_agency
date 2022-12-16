@@ -13,7 +13,7 @@ const getRoute = (setRoute, setIsSave) => {
     .then((res) => res.data)
     .then((data) => data.body)
     .then((body) => {
-      console.log(body);
+      // console.log(body);
       setRoute(body);
       setIsSave(false);
     })
@@ -45,7 +45,7 @@ const getRouteStationById = (
   setStationById,
   setIsSave,
   setNotification,
-  setNumberStation
+  setNumberStation = null
 ) => {
   axios({
     method: "get",
@@ -56,13 +56,16 @@ const getRouteStationById = (
   })
     .then((res) => res.data)
     .then((data) => {
-      // console.log(data);
+      console.log(data);
+
       setStationById(data.routeStationList);
       setIsSave(false);
-      setNumberStation(data.routeStationList.length - 1);
+      if (setNumberStation) {
+        setNumberStation(data.routeStationList.length - 1);
+      }
     })
     .catch((err) => {
-      setNotification("error");
+      // setNotification("error");
       console.log(err);
     });
 };
