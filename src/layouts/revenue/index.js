@@ -27,7 +27,7 @@ function Revenue() {
               marginBottom="2rem"
             >
               <MDTypography variant="h6" color="white">
-                Manage Revenue
+                Doanh thu
               </MDTypography>
             </MDBox>
           </Grid>

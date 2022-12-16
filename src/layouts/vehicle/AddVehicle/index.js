@@ -26,17 +26,16 @@ function AddVehicle({ setClickSave, setNotification }) {
     <Card sx={{ height: "350px" }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={4}>
         <MDTypography variant="h6" fontWeight="medium" textTransform="capitalize">
-          Add vehicle
+          Thêm xe
         </MDTypography>
       </MDBox>
       <MDBox pt={3} pb={2} px={4}>
         <MDBox mb={2} display="flex" justifyContent="flex-start">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-            Name
+            Tên
           </MDTypography>
           <MDBox ml={3} width="70%">
             <TextField
-              label="name"
               variant="outlined"
               sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {
@@ -50,11 +49,10 @@ function AddVehicle({ setClickSave, setNotification }) {
         </MDBox>
         <MDBox mb={2} display="flex" justifyContent="flex-start">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-            License Plate
+            Biển số xe
           </MDTypography>
           <MDBox ml={3} width="70%">
             <TextField
-              label="licensePlate"
               variant="outlined"
               sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {
@@ -68,11 +66,10 @@ function AddVehicle({ setClickSave, setNotification }) {
         </MDBox>
         <MDBox mb={2} display="flex">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
-            Quantity Seat
+            Số lượng ghế
           </MDTypography>
           <MDBox ml={3} width="70%">
             <TextField
-              label="quantitySeat"
               variant="outlined"
               sx={{ mt: -1, width: "100%" }}
               onChange={(e) => {

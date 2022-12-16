@@ -83,7 +83,7 @@ function Route() {
               marginBottom="2rem"
             >
               <MDTypography variant="h6" color="white">
-                Manage Routes
+                Quản lý tuyến
               </MDTypography>
             </MDBox>
 

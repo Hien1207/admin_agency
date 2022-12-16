@@ -15,17 +15,17 @@ function ListRoute({ listRoute, listStation, setIsSave, setNotification }) {
     <Card id="delete-account">
       <MDBox pt={3} px={2}>
         <MDTypography variant="h6" fontWeight="medium" ml={2}>
-          List Route
+          Danh sách tuyến
         </MDTypography>
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
         <Item
           stt="STT"
-          dep="Departure"
-          des="Destination"
-          quantity="Quantity"
-          station="Station"
-          time="Time"
+          dep="Điểm đi"
+          des="Điểm đến"
+          quantity="Số trạm"
+          station="Trạm"
+          time="Thời gian"
           hide
         />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
