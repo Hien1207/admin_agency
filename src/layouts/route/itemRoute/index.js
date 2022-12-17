@@ -102,7 +102,7 @@ function ItemRoute({
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
-        <DialogTitle ml="43%">Update</DialogTitle>
+        <DialogTitle ml="43%">Cập nhật</DialogTitle>
         <UpdateRoute
           listStation={listStation}
           handleClose={handleClose}
