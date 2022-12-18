@@ -60,6 +60,8 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
               label="Giá trị"
               variant="outlined"
               value={search.value}
+              type={search.type === 1 || search.type === 2 ? "date" : "text"}
+              InputLabelProps={{ shrink: true }}
               onChange={(e) => {
                 setSearch({
                   ...search,
@@ -81,7 +83,17 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
         )}
       </MDBox>
       <MDBox pt={1} pb={2} px={2}>
-        <Item stt="STT" date="Ngày khởi hành" time="Thời gian khởi hành" hide />
+        <Item
+          stt="STT"
+          route="Tuyến"
+          dateOrder="Ngày đặt"
+          date="Ngày đi"
+          time="Thời gian"
+          nameVehicle="Tên xe"
+          numberTicket="Số lượng vé"
+          totalPrice="Tổng giá"
+          hide
+        />
         <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
           <DataTable
             table={{ columns, rows }}

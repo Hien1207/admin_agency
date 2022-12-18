@@ -138,22 +138,22 @@ function ItemTrip({
                 handleDeleteTripInstance();
               }}
             >
-              <Icon>delete</Icon>&nbsp;delete
+              <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>
           </MDBox>
           <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-            <Icon>edit</Icon>&nbsp;edit
+            <Icon>edit</Icon>&nbsp;Sửa
           </MDButton>
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle ml="43%">Update</DialogTitle>
+        <DialogTitle ml="43%">Cập nhật</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Date"
+            label="Ngày khởi hành"
             type="date"
             fullWidth
             variant="standard"
@@ -170,7 +170,7 @@ function ItemTrip({
             autoFocus
             margin="dense"
             id="name"
-            label="Time"
+            label="Thời gian khởi hành"
             type="time"
             fullWidth
             variant="standard"
@@ -185,14 +185,14 @@ function ItemTrip({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Hủy</Button>
           <Button
             onClick={() => {
               handleUpdateTripInstance();
               handleClose();
             }}
           >
-            Update
+            Cập nhật
           </Button>
         </DialogActions>
       </Dialog>

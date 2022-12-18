@@ -112,7 +112,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                     height: 40,
                   }}
                 >
-                  <InputLabel id="demo-simple-select-label">Departure</InputLabel>
+                  <InputLabel id="demo-simple-select-label">Điểm đi</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
@@ -213,11 +213,11 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
                   height: 40,
                 }}
               >
-                <InputLabel id="demo-simple-select-label">Station 1</InputLabel>
+                <InputLabel id="demo-simple-select-label">Trạm 1</InputLabel>
                 <Select
                   labelId="demo-simple-select-label"
                   id="demo-simple-select"
-                  label="Station 1"
+                  label="Trạm 1"
                   value={dataAddRoute.idStation1}
                   onChange={(e) => {
                     setDataAddRoute({
@@ -257,7 +257,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
             <MDBox ml={0} width="15%">
               <TextField
                 id="time"
-                label="Select Time"
+                label="thời gian"
                 type="time"
                 // defaultValue="03:30"
                 sx={{ width: 200, mt: -1 }}
@@ -345,7 +345,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
             <MDBox ml={0} width="15%">
               <TextField
                 id="time"
-                label="Select Time"
+                label="thời gian"
                 type="time"
                 // defaultValue="03:30"
                 sx={{ width: 200, mt: -1 }}
@@ -437,7 +437,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
           <MDBox ml={0} width="15%">
             <TextField
               id="time"
-              label="Select Time"
+              label="thời gian"
               type="time"
               // defaultValue="03:30"
               sx={{ width: 200, mt: -1 }}
@@ -465,7 +465,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
               handleCreateRoute();
             }}
           >
-            Save
+            Lưu
           </MDButton>
         </MDBox>
       </MDBox>

@@ -45,11 +45,11 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
                     height: 40,
                   }}
                 >
-                  <InputLabel id="demo-simple-select-label">Route</InputLabel>
+                  <InputLabel id="demo-simple-select-label">Tuyến</InputLabel>
                   <Select
                     labelId="demo-simple-select-label"
                     id="demo-simple-select"
-                    label="Lop"
+                    label="Tuyến"
                     defaultValue={0}
                     onChange={(e) => {
                       setIdRouteChosen(e.target.value);
@@ -78,7 +78,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
               <MDBox ml={0} width="70%">
                 <TextField
                   id="date"
-                  label="Select Date"
+                  label="Ngày khởi hành"
                   type="date"
                   // defaultValue="2022-12-02"
                   required
@@ -105,7 +105,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
               <MDBox ml={0} width="70%">
                 <TextField
                   id="time"
-                  label="Select Time"
+                  label="Thời gian khởi hành"
                   type="time"
                   // defaultValue="03:30"
                   sx={{ width: "100%", mt: -1 }}

@@ -21,7 +21,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import * as React from "react";
 // @mui material components
-import Icon from "@mui/material/Icon";
+// import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDButton from "components/MDButton";
@@ -77,7 +77,7 @@ function ItemHistory({
   };
   return (
     <MDBox
-      pl={3}
+      pl={1}
       display="flex"
       height="3.5rem"
       // pt={2}
@@ -103,7 +103,7 @@ function ItemHistory({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="15%"
+        width="14%"
         textAlign="left"
       >
         {dateOrder?.split("T")[0]}
@@ -113,7 +113,7 @@ function ItemHistory({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="15%"
+        width="13%"
         textAlign="left"
       >
         {date?.split("T")[0]}
@@ -133,7 +133,7 @@ function ItemHistory({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="16%"
         textAlign="left"
       >
         {nameVehicle}
@@ -143,7 +143,7 @@ function ItemHistory({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="8%"
+        width="10%"
         textAlign="left"
       >
         {numberTicket}
@@ -152,18 +152,18 @@ function ItemHistory({
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="8%"
+        ml={2}
+        width="9%"
         textAlign="left"
       >
         {totalPrice}
       </MDTypography>
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={0} width="30%">
+        <MDBox display="flex" alignItems="center" mt={0} width="20%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={0} width="30%">
+        <MDBox display="flex" alignItems="center" mt={0} width="20%">
           <MDBox mr={0} ml={0}>
             <MDButton
               variant="text"
@@ -172,11 +172,11 @@ function ItemHistory({
                 handleDeleteTripInstance();
               }}
             >
-              <Icon>delete</Icon>&nbsp;delete
+              {/* <Icon>delete</Icon>&nbsp;delete */}
             </MDButton>
           </MDBox>
           <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-            <Icon>edit</Icon>&nbsp;edit
+            {/* <Icon>edit</Icon>&nbsp;edit */}
           </MDButton>
         </MDBox>
       )}

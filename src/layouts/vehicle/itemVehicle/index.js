@@ -98,16 +98,16 @@ function ItemVehicle({
         <MDBox display="flex" alignItems="center" mt={-3} width="15%">
           <MDBox>
             <MDButton variant="text" color="error" disabled>
-              <Icon>delete</Icon>&nbsp;delete
+              <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>
           </MDBox>
           <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-            <Icon>edit</Icon>&nbsp;edit
+            <Icon>edit</Icon>&nbsp;Sửa
           </MDButton>
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle ml="43%">Update</DialogTitle>
+        <DialogTitle ml="43%">Cập nhật</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
@@ -142,6 +142,7 @@ function ItemVehicle({
                 licensePlate: e.target.value,
               });
             }}
+            disabled
           />
           <TextField
             autoFocus
@@ -179,14 +180,14 @@ function ItemVehicle({
           /> */}
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Cancel</Button>
+          <Button onClick={handleClose}>Hủy</Button>
           <Button
             onClick={() => {
               handleUpdateVehicle();
               handleClose();
             }}
           >
-            Update
+            Cập nhật
           </Button>
         </DialogActions>
       </Dialog>
