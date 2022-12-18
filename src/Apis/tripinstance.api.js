@@ -21,6 +21,28 @@ const getTripInstance = (setTripInstance, setIsSave) => {
       console.log(err);
     });
 };
+const getTripInstanceById = (idTripInstance, setListStation, setIsSave) => {
+  axios({
+    method: "get",
+    url: `${baseUrl}admin/get-trip-instance-by-id/${idTripInstance}`,
+    headers: {
+      Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => {
+      console.log(data);
+      setListStation(data.body.adminGetRouteResponse.routeStationList);
+      setIsSave(false);
+      // if (setNumberStation) {
+      //   setNumberStation(data.body.routeStationList.length - 1);
+      // }
+    })
+    .catch((err) => {
+      // setNotification("error");
+      console.log(err);
+    });
+};
 
 const createTripInstance = (Data, setIsSave, setNotification) => {
   axios({
@@ -87,4 +109,10 @@ const updateTripInstance = (Data, setIsSave, setNotification) => {
     });
 };
 
-export { getTripInstance, createTripInstance, updateTripInstance, deleteTripInstance };
+export {
+  getTripInstance,
+  getTripInstanceById,
+  createTripInstance,
+  updateTripInstance,
+  deleteTripInstance,
+};

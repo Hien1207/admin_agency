@@ -22,6 +22,28 @@ const getVehicle = (setVehicles, setIsSave) => {
     });
 };
 
+const getVehicleById = (idVehicle, setVehicle, setIsSave) => {
+  axios({
+    method: "get",
+    url: `${baseUrl}get-vehicle-by-id/${idVehicle}`,
+    headers: {
+      Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => {
+      setVehicle(data.body);
+      setIsSave(false);
+      // if (setNumberStation) {
+      //   setNumberStation(data.body.routeStationList.length - 1);
+      // }
+    })
+    .catch((err) => {
+      // setNotification("error");
+      console.log(err);
+    });
+};
+
 // const getAllVehicle = (setAllVehicles, setIsSave) => {
 //   axios({
 //     method: "get",
@@ -85,4 +107,4 @@ const updateVehicle = (Data, setIsSave, setNotification) => {
     });
 };
 
-export { getVehicle, createVehicle, updateVehicle };
+export { getVehicle, getVehicleById, createVehicle, updateVehicle };
