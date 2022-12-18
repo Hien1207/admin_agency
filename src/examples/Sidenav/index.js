@@ -95,7 +95,7 @@ function Sidenav({ color, brand, brandName, routes, ...rest }) {
           key={key}
           to={route}
           onClick={() => {
-            if (name === "Logout") {
+            if (name === "Đăng xuất") {
               logout(navigate);
             }
           }}

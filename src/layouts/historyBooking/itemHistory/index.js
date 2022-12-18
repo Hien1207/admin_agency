@@ -21,7 +21,7 @@ import MDBox from "components/MDBox";
 import MDTypography from "components/MDTypography";
 import * as React from "react";
 // @mui material components
-import Icon from "@mui/material/Icon";
+// import Icon from "@mui/material/Icon";
 
 // Material Dashboard 2 React components
 import MDButton from "components/MDButton";
@@ -35,12 +35,15 @@ import DialogTitle from "@mui/material/DialogTitle";
 import { Button, TextField } from "@mui/material";
 import { deleteTripInstance, updateTripInstance } from "Apis/tripinstance.api";
 
-function ItemTrip({
+function ItemHistory({
   stt,
-  departure,
-  arrival,
+  route,
+  dateOrder,
   date,
   time,
+  nameVehicle,
+  numberTicket,
+  totalPrice,
   hide,
   idTripInstance,
   idRoute,
@@ -74,14 +77,15 @@ function ItemTrip({
   };
   return (
     <MDBox
-      pl={3}
+      pl={1}
       display="flex"
       height="3.5rem"
-      pt={2}
+      // pt={2}
       borderBottom="0.2px solid #f0f2f5"
       width="100%"
+      alignItems="center"
     >
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="10%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
         {stt}
       </MDTypography>
       <MDTypography
@@ -89,48 +93,78 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="20%"
         textAlign="left"
       >
-        {departure}
+        {route}
       </MDTypography>
       <MDTypography
         variant="caption"
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="14%"
         textAlign="left"
       >
-        {arrival}
+        {dateOrder?.split("T")[0]}
       </MDTypography>
       <MDTypography
         variant="caption"
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="13%"
         textAlign="left"
       >
-        {date}
+        {date?.split("T")[0]}
       </MDTypography>
       <MDTypography
         variant="caption"
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="13%"
         textAlign="left"
       >
         {time}
       </MDTypography>
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={1}
+        width="16%"
+        textAlign="left"
+      >
+        {nameVehicle}
+      </MDTypography>
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={1}
+        width="10%"
+        textAlign="left"
+      >
+        {numberTicket}
+      </MDTypography>
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={2}
+        width="9%"
+        textAlign="left"
+      >
+        {totalPrice}
+      </MDTypography>
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
+        <MDBox display="flex" alignItems="center" mt={0} width="20%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
-          <MDBox mr={2} ml={2}>
+        <MDBox display="flex" alignItems="center" mt={0} width="20%">
+          <MDBox mr={0} ml={0}>
             <MDButton
               variant="text"
               color="error"
@@ -138,22 +172,22 @@ function ItemTrip({
                 handleDeleteTripInstance();
               }}
             >
-              <Icon>delete</Icon>&nbsp;Xóa
+              {/* <Icon>delete</Icon>&nbsp;delete */}
             </MDButton>
           </MDBox>
           <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-            <Icon>edit</Icon>&nbsp;Sửa
+            {/* <Icon>edit</Icon>&nbsp;edit */}
           </MDButton>
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose}>
-        <DialogTitle ml="43%">Cập nhật</DialogTitle>
+        <DialogTitle ml="43%">Update</DialogTitle>
         <DialogContent>
           <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="Ngày khởi hành"
+            label="Date"
             type="date"
             fullWidth
             variant="standard"
@@ -170,7 +204,7 @@ function ItemTrip({
             autoFocus
             margin="dense"
             id="name"
-            label="Thời gian khởi hành"
+            label="Time"
             type="time"
             fullWidth
             variant="standard"
@@ -185,14 +219,14 @@ function ItemTrip({
           />
         </DialogContent>
         <DialogActions>
-          <Button onClick={handleClose}>Hủy</Button>
+          <Button onClick={handleClose}>Cancel</Button>
           <Button
             onClick={() => {
               handleUpdateTripInstance();
               handleClose();
             }}
           >
-            Cập nhật
+            Update
           </Button>
         </DialogActions>
       </Dialog>
@@ -200,12 +234,15 @@ function ItemTrip({
   );
 }
 
-ItemTrip.propTypes = {
+ItemHistory.propTypes = {
   stt: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
-  departure: PropTypes.string.isRequired,
-  arrival: PropTypes.string.isRequired,
+  route: PropTypes.string.isRequired,
+  dateOrder: PropTypes.string.isRequired,
+  nameVehicle: PropTypes.string.isRequired,
+  numberTicket: PropTypes.string.isRequired,
+  totalPrice: PropTypes.string.isRequired,
   idTripInstance: PropTypes.number.isRequired,
   idRoute: PropTypes.number.isRequired,
   hide: PropTypes.bool.isRequired,
@@ -213,4 +250,4 @@ ItemTrip.propTypes = {
   setNotification: PropTypes.func.isRequired,
 };
 
-export default ItemTrip;
+export default ItemHistory;

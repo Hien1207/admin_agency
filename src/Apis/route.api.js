@@ -56,13 +56,14 @@ const getRouteStationById = (
   })
     .then((res) => res.data)
     .then((data) => {
-      console.log(data);
-
-      setStationById(data.routeStationList);
-      setIsSave(false);
+      // console.log(data);
       if (setNumberStation) {
         setNumberStation(data.routeStationList.length - 1);
+        setStationById(data);
+      } else {
+        setStationById(data.routeStationList);
       }
+      setIsSave(false);
     })
     .catch((err) => {
       // setNotification("error");
@@ -114,7 +115,7 @@ const deleteRoute = (idRoute, setIsSave, setNotification) => {
 const updateRoute = (Data, setIsSave, setNotification) => {
   axios({
     method: "post",
-    url: `${baseUrl}admin/update-route-and-station`,
+    url: `${baseUrl}admin/update-route-and-routestation`,
     data: Data,
     headers: {
       Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,

@@ -60,7 +60,13 @@ function ItemRoute({
     deleteRoute(idRoute, setIsSave, setNotification);
   };
   return (
-    <MDBox pl={2} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
+    <MDBox
+      pl={2}
+      display="flex"
+      height="3.5rem"
+      borderBottom="0.2px solid #f0f2f5"
+      alignItems="center"
+    >
       <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
         {stt}
       </MDTypography>
@@ -84,7 +90,7 @@ function ItemRoute({
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={-2} width="10%">
+        <MDBox display="flex" alignItems="center" mt={0} width="10%">
           <MDBox mr={1} ml={1}>
             <MDButton
               variant="text"
@@ -93,16 +99,16 @@ function ItemRoute({
                 handleDeleleRoute();
               }}
             >
-              <Icon>delete</Icon>&nbsp;delete
+              <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>
           </MDBox>
           <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-            <Icon>edit</Icon>&nbsp;edit
+            <Icon>edit</Icon>&nbsp;Sửa
           </MDButton>
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose} maxWidth="xl" fullWidth>
-        <DialogTitle ml="43%">Update</DialogTitle>
+        <DialogTitle ml="43%">Cập nhật</DialogTitle>
         <UpdateRoute
           listStation={listStation}
           handleClose={handleClose}
