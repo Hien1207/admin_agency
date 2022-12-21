@@ -105,10 +105,58 @@ const getListHistoryByYear = (year, setListHistory, setIsSave) => {
     });
 };
 
+const getListHistoryByYearForStatistic = async (year) => {
+  const res = await axios({
+    method: "get",
+    url: `${baseUrl}admin/get-statistic/${year}`,
+    headers: {
+      Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+    },
+  });
+  try {
+    const data = { ...res.data };
+    let sum = 0;
+    data.adminGetStatisticList.forEach((item) => {
+      sum += item.turnover;
+    });
+    return sum;
+  } catch (e) {
+    console.log(e);
+    return 0;
+  }
+};
+
+const getRevenueHistoryByYear = (year, setListRevenue, setRevenueYear, setIsSave) => {
+  axios({
+    method: "get",
+    url: `${baseUrl}admin/get-statistic/${year}`,
+    headers: {
+      Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => {
+      const arr = [];
+      data.adminGetStatisticList.forEach((item) => {
+        arr.push(item.turnover);
+      });
+      const sum = arr.reduce((item, sum1) => item + sum1, 0);
+      setRevenueYear(sum);
+      setListRevenue(arr);
+      setIsSave(false);
+    })
+    .catch((err) => {
+      console.log(err);
+      setIsSave(false);
+    });
+};
+
 export {
   getListHistory,
   getListHistoryByCustomer,
   getListHistoryByDateOrder,
   getListHistoryByDateStart,
   getListHistoryByYear,
+  getListHistoryByYearForStatistic,
+  getRevenueHistoryByYear,
 };
