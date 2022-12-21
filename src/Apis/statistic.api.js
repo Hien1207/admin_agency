@@ -2,7 +2,7 @@ import axios from "axios";
 import { STORAGE, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-const getListHistory = (setListHistory, setIsSave) => {
+const getListHistory = (setListHistory, setIsSave = null) => {
   axios({
     method: "get",
     url: `${baseUrl}admin/get-all-history`,
@@ -13,7 +13,9 @@ const getListHistory = (setListHistory, setIsSave) => {
     .then((res) => res.data)
     .then((data) => {
       setListHistory(data);
-      setIsSave(false);
+      if (setIsSave) {
+        setIsSave(false);
+      }
     })
     .catch((err) => {
       console.log(err);
