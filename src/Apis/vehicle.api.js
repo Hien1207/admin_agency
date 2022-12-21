@@ -15,10 +15,13 @@ const getVehicle = (setVehicles, setIsSave) => {
     .then((body) => {
       // console.log(body);
       setVehicles(body);
-      setIsSave(false);
+      if (setIsSave) {
+        setIsSave(false);
+      }
     })
     .catch((err) => {
       console.log(err);
+      setIsSave(false);
     });
 };
 
@@ -41,6 +44,7 @@ const getVehicleById = (idVehicle, setVehicle, setIsSave) => {
     .catch((err) => {
       // setNotification("error");
       console.log(err);
+      setIsSave(false);
     });
 };
 

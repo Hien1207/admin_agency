@@ -2,10 +2,10 @@ import axios from "axios";
 import { STORAGE, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-const getEveryTrip = (setTrip, setIsSave) => {
+const getEveryTrip = (setTrip, setIsSave = null) => {
   axios({
     method: "get",
-    url: `${baseUrl}admin//api/admin/get-everything-trip`,
+    url: `${baseUrl}admin/get-everything-trip`,
     headers: {
       Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
     },
@@ -14,7 +14,9 @@ const getEveryTrip = (setTrip, setIsSave) => {
     .then((data) => data.body)
     .then((body) => {
       setTrip(body);
-      setIsSave(false);
+      if (setIsSave) {
+        setIsSave(false);
+      }
     })
     .catch((err) => {
       console.log(err);
@@ -42,7 +44,6 @@ const createTripPrice = (Data, setIsSave, setNotification) => {
     });
 };
 
-
 const updatePriceTrip = (Data, setIsSave, setNotification) => {
   axios({
     method: "post",
@@ -65,24 +66,24 @@ const updatePriceTrip = (Data, setIsSave, setNotification) => {
 };
 
 const updateTrip = (Data, setIsSave, setNotification) => {
-    axios({
-      method: "post",
-      url: `${baseUrl}admin/update-trip`,
-      data: Data,
-      headers: {
-        Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
-      },
+  axios({
+    method: "post",
+    url: `${baseUrl}admin/update-trip`,
+    data: Data,
+    headers: {
+      Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => data.body)
+    .then((body) => {
+      setIsSave(true);
+      setNotification(body);
     })
-      .then((res) => res.data)
-      .then((data) => data.body)
-      .then((body) => {
-        setIsSave(true);
-        setNotification(body);
-      })
-      .catch((err) => {
-        console.log(err);
-        setNotification("error");
-      });
-  };
+    .catch((err) => {
+      console.log(err);
+      setNotification("error");
+    });
+};
 
-export { getEveryTrip, createTripPrice,updatePriceTrip, updateTrip };
+export { getEveryTrip, createTripPrice, updatePriceTrip, updateTrip };

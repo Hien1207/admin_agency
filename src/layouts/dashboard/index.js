@@ -7,8 +7,28 @@ import MDBox from "components/MDBox";
 import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ComplexStatisticsCard from "examples/Cards/StatisticsCards/ComplexStatisticsCard";
+import { useEffect, useState } from "react";
+import { getVehicle } from "Apis/vehicle.api";
+import { getRoute } from "Apis/route.api";
+import { getEveryTrip } from "Apis/trip.api";
+import { getListHistory, getListHistoryByYearForStatistic } from "Apis/statistic.api";
 
 function Dashboard() {
+  const [allVehicle, setAllVehicles] = useState([]);
+  const [allRoute, setAllRoute] = useState([]);
+  const [allTrip, setAllTrip] = useState([]);
+  const [allTicket, setAllTicket] = useState([]);
+  const [revenue, setRevenue] = useState(0);
+  useEffect(() => {
+    getVehicle(setAllVehicles);
+    getRoute(setAllRoute);
+    getEveryTrip(setAllTrip);
+    getListHistory(setAllTicket);
+    const currentYear = new Date().getFullYear();
+    getListHistoryByYearForStatistic(currentYear)
+      .then((data) => setRevenue(data))
+      .catch((e) => console.log(e));
+  }, []);
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -20,7 +40,7 @@ function Dashboard() {
                 color="dark"
                 icon="assignment"
                 title="Xe"
-                count="+7"
+                count={`+${allVehicle.length}`}
                 percentage={{
                   color: "success",
                   amount: "+",
@@ -34,7 +54,7 @@ function Dashboard() {
               <ComplexStatisticsCard
                 icon="cottage"
                 title="Tuyến"
-                count="+50"
+                count={`+${allRoute.length}`}
                 percentage={{
                   color: "success",
                   amount: "+",
@@ -49,7 +69,7 @@ function Dashboard() {
                 color="dark"
                 icon="assignment"
                 title="Chuyến"
-                count="+12"
+                count={`+${allTrip.length}`}
                 percentage={{
                   color: "success",
                   amount: "+",
@@ -64,7 +84,7 @@ function Dashboard() {
                 color="success"
                 icon="groups"
                 title="Vé"
-                count="+150"
+                count={`+${allTicket.length}`}
                 percentage={{
                   color: "success",
                   amount: "+",
@@ -78,8 +98,8 @@ function Dashboard() {
               <ComplexStatisticsCard
                 color="primary"
                 icon="groups"
-                title="Doang thu"
-                count="+2000"
+                title={`Doanh thu ${new Date().getFullYear()}`}
+                count={`${revenue}`}
                 percentage={{
                   color: "success",
                   amount: "+",

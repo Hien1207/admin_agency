@@ -2,7 +2,7 @@ import axios from "axios";
 import { STORAGE, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-const getRoute = (setRoute, setIsSave) => {
+const getRoute = (setRoute, setIsSave = null) => {
   axios({
     method: "get",
     url: `${baseUrl}admin/get-route-and-routestation`,
@@ -15,7 +15,9 @@ const getRoute = (setRoute, setIsSave) => {
     .then((body) => {
       // console.log(body);
       setRoute(body);
-      setIsSave(false);
+      if (setIsSave) {
+        setIsSave(false);
+      }
     })
     .catch((err) => {
       console.log(err);
