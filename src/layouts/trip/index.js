@@ -63,9 +63,6 @@ function Trip() {
     }
     return res;
   };
-
-  console.log(listTrip);
-
   return (
     <DashboardLayout>
       <DashboardNavbar />

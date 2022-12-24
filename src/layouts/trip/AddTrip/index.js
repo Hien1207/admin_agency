@@ -30,9 +30,9 @@ function AddTrip({ setIsSave, setNotification }) {
   const [listPrice, setListPrice] = useState([]);
   const [disabled, setDisabled] = useState(true);
   const [price, setPrice] = useState({
-    price1: "",
-    price2: "",
-    price3: "",
+    price1: 0,
+    price2: 0,
+    price3: 0,
   });
 
   useEffect(() => {
@@ -111,33 +111,33 @@ function AddTrip({ setIsSave, setNotification }) {
       setListPrice([
         {
           idRouteStation: listStation[0].id,
-          price: price.price1,
+          price: parseInt(price.price1, 10),
         },
         {
           idRouteStation: listStation[1].id,
-          price: price.price2,
+          price: parseInt(price.price2, 10),
         },
         {
           idRouteStation: listStation[2].id,
-          price: price.price3,
+          price: parseInt(price.price3, 10),
         },
       ]);
     } else if (listStation.length > 1) {
       setListPrice([
         {
           idRouteStation: listStation[0].id,
-          price: price.price1,
+          price: parseInt(price.price1, 10),
         },
         {
           idRouteStation: listStation[1].id,
-          price: price.price2,
+          price: parseInt(price.price2, 10),
         },
       ]);
     } else if (listStation.length > 0) {
       setListPrice([
         {
           idRouteStation: listStation[0].id,
-          price: price.price1,
+          price: parseInt(price.price1, 10),
         },
       ]);
     }
@@ -154,9 +154,6 @@ function AddTrip({ setIsSave, setNotification }) {
       setNotification
     );
   };
-
-  console.log(listPrice);
-
   return (
     <Card sx={{ mb: 4 }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={4}>
@@ -239,7 +236,6 @@ function AddTrip({ setIsSave, setNotification }) {
                         <TextField
                           variant="outlined"
                           sx={{ mt: 0, width: "100%" }}
-                          value={price.price1.replace(/\D/, "")}
                           onChange={(e) => {
                             setPrice({
                               ...price,
@@ -255,7 +251,6 @@ function AddTrip({ setIsSave, setNotification }) {
                         <TextField
                           variant="outlined"
                           sx={{ mt: 0, width: "100%" }}
-                          value={price.price2.replace(/\D/, "")}
                           onChange={(e) => {
                             setPrice({
                               ...price,
@@ -268,10 +263,19 @@ function AddTrip({ setIsSave, setNotification }) {
                     )}
                     {listStation.length > 2 && (
                       <MDBox ml={1} mt={1} width="100%">
+                        {/* <TextField
+                          variant="outlined"
+                          sx={{ mt: -1, width: "100%" }}
+                          onChange={(e) => {
+                            setVehicle({
+                              ...vehicle,
+                              seatQuantity: e.target.value,
+                            });
+                          }}
+                        /> */}
                         <TextField
                           variant="outlined"
                           sx={{ mt: 0, width: "100%" }}
-                          value={price.price3.replace(/\D/, "")}
                           onChange={(e) => {
                             setPrice({
                               ...price,
@@ -334,7 +338,7 @@ function AddTrip({ setIsSave, setNotification }) {
                               stt={index + 1}
                               dep={item.nameVehicle}
                               des={item.licensePlate}
-                              time={item.licensePlate}
+                              time={item.seatQuantity.quantity}
                             />
                           </MDBox>
                           <MDBox mt={0} mb={2} ml={4} width="10%" alignSelf="flex-end">

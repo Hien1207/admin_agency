@@ -108,33 +108,33 @@ function ItemTrip({
       setList([
         {
           idRouteStation: routeStationPrice[0].id,
-          price: price.price1,
+          price: parseInt(price.price1, 10),
         },
         {
           idRouteStation: routeStationPrice[1].id,
-          price: price.price2,
+          price: parseInt(price.price2, 10),
         },
         {
           idRouteStation: routeStationPrice[2].id,
-          price: price.price3,
+          price: parseInt(price.price3, 10),
         },
       ]);
     } else if (routeStationPrice?.length > 1) {
       setList([
         {
           idRouteStation: routeStationPrice[0].id,
-          price: price.price1,
+          price: parseInt(price.price1, 10),
         },
         {
           idRouteStation: routeStationPrice[1].id,
-          price: price.price2,
+          price: parseInt(price.price2, 10),
         },
       ]);
     } else if (routeStationPrice?.length > 0) {
       setList([
         {
           idRouteStation: routeStationPrice[0].id,
-          price: price.price1,
+          price: parseInt(price.price1, 10),
         },
       ]);
     }
@@ -144,17 +144,12 @@ function ItemTrip({
     updatePriceTrip(
       {
         idTrip,
-        listPrices: list,
+        listPrice: list,
       },
       setIsSave,
       setNotification
     );
   };
-
-  console.log(price);
-  console.log(list);
-  console.log(routeStationPrice);
-
   return (
     <MDBox pl={3} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
       <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="10%">

@@ -125,7 +125,6 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
         idStation2: id2,
       };
     }
-    console.log(requestObject);
     updateRoute(requestObject, setIsSave, setNotification);
   };
   return (

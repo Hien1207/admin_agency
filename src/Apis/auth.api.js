@@ -63,7 +63,7 @@ function logout(navigate) {
     });
 }
 
-function currentUser() {
+function currentUser(setProfile, setIsSave) {
   axios({
     method: "get",
     url: `${baseUrl}auth/current`,
@@ -74,6 +74,8 @@ function currentUser() {
   })
     .then((res) => res.data)
     .then((data) => {
+      setProfile(data);
+      setIsSave(false);
       console.log(data);
     })
     .catch((err) => {
