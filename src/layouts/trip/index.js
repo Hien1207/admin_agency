@@ -10,8 +10,59 @@ import DashboardLayout from "examples/LayoutContainers/DashboardLayout";
 import DashboardNavbar from "examples/Navbars/DashboardNavbar";
 import ListTrip from "layouts/trip/ListTrip";
 import AddTrip from "layouts/trip/AddTrip";
+import { useEffect, useState } from "react";
+import { getEveryTrip } from "Apis/trip.api";
+import { Alert, Button } from "@mui/material";
+import Loading from "components/Loading";
 
 function Trip() {
+  const [listTrip, setListTrip] = useState([]);
+  const [isSave, setIsSave] = useState(true);
+  const [notification, setNotification] = useState("");
+  useEffect(() => {
+    const notiTime = setTimeout(() => {
+      setNotification("");
+    }, 10000);
+    return () => {
+      clearTimeout(notiTime);
+    };
+  }, [notification]);
+
+  useEffect(() => {
+    if (isSave) {
+      getEveryTrip(setListTrip, setIsSave);
+    }
+  }, [isSave]);
+  const elemNoti = () => {
+    let res = null;
+    if (notification?.length > 0) {
+      if (notification === "error") {
+        res = (
+          <Alert
+            severity="error"
+            style={{ marginBottom: "10px" }}
+            action={
+              <Button color="inherit" size="small">
+                UNDO
+              </Button>
+            }
+          >
+            {notification}
+          </Alert>
+        );
+      } else {
+        res = (
+          <Alert
+            severity="success"
+            style={{ marginBottom: "10px", backgroundColor: "rgb(212,250,218)", color: "black" }}
+          >
+            {notification}
+          </Alert>
+        );
+      }
+    }
+    return res;
+  };
   return (
     <DashboardLayout>
       <DashboardNavbar />
@@ -33,8 +84,21 @@ function Trip() {
               </MDTypography>
             </MDBox>
             <MDBox mb={3} display="block">
-              <AddTrip />
-              <ListTrip />
+              {isSave ? (
+                <Loading type="spin" color="rgb(41,130,235)" />
+              ) : (
+                <AddTrip setIsSave={setIsSave} setNotification={setNotification} />
+              )}
+              {elemNoti()}
+              {isSave ? (
+                <Loading type="spin" color="rgb(41,130,235)" />
+              ) : (
+                <ListTrip
+                  listTrip={listTrip}
+                  setIsSave={setIsSave}
+                  setNotification={setNotification}
+                />
+              )}
             </MDBox>
           </Grid>
         </Grid>

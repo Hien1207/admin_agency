@@ -10,13 +10,15 @@ import { useEffect, useState } from "react";
 import { FormControl, InputLabel, Select, MenuItem, TextField } from "@mui/material";
 import { getTripInstance, getTripInstanceById } from "Apis/tripinstance.api";
 import { getVehicle, getVehicleById } from "Apis/vehicle.api";
+import { createTripPrice } from "Apis/trip.api";
 import Item from "layouts/tripInstance/itemStation";
 import HighlightOffRoundedIcon from "@mui/icons-material/HighlightOffRounded";
+import { PropTypes } from "prop-types";
 
-function AddTrip() {
+function AddTrip({ setIsSave, setNotification }) {
   const [tripInstances, setTripInstances] = useState([]);
   const [vehicle, setVehicle] = useState([]);
-  const [isSave, setIsSave] = useState(true);
+  const [isSaveTripIns, setIsSaveTripIns] = useState(true);
   const [listStation, setListStation] = useState([]);
   const [isSaveStation, setIsSaveStation] = useState(true);
   const [idTripInstanceChosen, setIdTripInstanceChosen] = useState(0);
@@ -24,20 +26,21 @@ function AddTrip() {
   const [idVehicleChosen, setIdVehicleChosen] = useState(0);
   const [VehicleChosen, setVehicleChosen] = useState([]);
   const [listVehicleChosen, setListVehicleChosen] = useState([]);
-  // const [isRemove, setIsRemove] = React.useState(false);
+  const [idVehicle, setIdVehicle] = useState([]);
+  const [listPrice, setListPrice] = useState([]);
+  const [disabled, setDisabled] = useState(true);
+  const [price, setPrice] = useState({
+    price1: 0,
+    price2: 0,
+    price3: 0,
+  });
 
-  // const [notification, setNotification] = useState("");
-  // const [dataAdd, setDataAdd] = React.useState({
-  //   date: "",
-  //   idRoute: 0,
-  //   timeStart: "",
-  // });
   useEffect(() => {
-    if (isSave) {
-      getTripInstance(setTripInstances, setIsSave);
-      getVehicle(setVehicle, setIsSave);
+    if (isSaveTripIns) {
+      getTripInstance(setTripInstances, setIsSaveTripIns);
+      getVehicle(setVehicle, setIsSaveTripIns);
     }
-  }, [isSave]);
+  }, [isSaveTripIns]);
   useEffect(() => {
     if (isSaveStation) {
       if (idTripInstanceChosen === 0) {
@@ -56,20 +59,101 @@ function AddTrip() {
         setIsSaveVehicle(false);
       } else {
         getVehicleById(idVehicleChosen, setVehicleChosen, setIsSaveVehicle);
+        setIdVehicle(idVehicle.concat(idVehicleChosen));
       }
     }
   }, [isSaveVehicle, idVehicleChosen]);
   useEffect(() => {
     if (isSaveVehicle) {
-      setListVehicleChosen([...listVehicleChosen, VehicleChosen]);
+      setListVehicleChosen(listVehicleChosen.concat(VehicleChosen));
     }
   }, [VehicleChosen]);
 
-  // const handleRemoveItem = (id) => {
-  //   setListVehicleChosen(listVehicleChosen.slice(listVehicleChosen.indexOf(id, 1)));
-  //   setIsRemove(false);
-  // };
+  const handleRemoveItem = (id) => {
+    setListVehicleChosen(listVehicleChosen.filter((item) => item.id !== id));
+    setIdVehicle(idVehicle.filter((item) => item !== id));
+  };
 
+  useEffect(() => {
+    if (listStation.length > 2) {
+      if (price.price1 && price.price2 && price.price3) {
+        setDisabled(false);
+      }
+    } else if (listStation.length > 1) {
+      if (price.price1 && price.price2) {
+        setDisabled(false);
+      }
+    } else if (listStation.length > 0) {
+      if (price.price1) {
+        setDisabled(false);
+      }
+    }
+  }, [disabled, listStation, price]);
+
+  const handleValid1 = (val) => {
+    if (val.length < 1) {
+      setDisabled(true);
+    }
+  };
+  const handleValid2 = (val) => {
+    if (val.length < 1) {
+      setDisabled(true);
+    }
+  };
+  const handleValid3 = (val) => {
+    if (val.length < 1) {
+      setDisabled(true);
+    }
+  };
+
+  useEffect(() => {
+    if (listStation.length > 2) {
+      setListPrice([
+        {
+          idRouteStation: listStation[0].id,
+          price: parseInt(price.price1, 10),
+        },
+        {
+          idRouteStation: listStation[1].id,
+          price: parseInt(price.price2, 10),
+        },
+        {
+          idRouteStation: listStation[2].id,
+          price: parseInt(price.price3, 10),
+        },
+      ]);
+    } else if (listStation.length > 1) {
+      setListPrice([
+        {
+          idRouteStation: listStation[0].id,
+          price: parseInt(price.price1, 10),
+        },
+        {
+          idRouteStation: listStation[1].id,
+          price: parseInt(price.price2, 10),
+        },
+      ]);
+    } else if (listStation.length > 0) {
+      setListPrice([
+        {
+          idRouteStation: listStation[0].id,
+          price: parseInt(price.price1, 10),
+        },
+      ]);
+    }
+  }, [listStation, price]);
+
+  const handleCreateTrip = () => {
+    createTripPrice(
+      {
+        idTripInstance: idTripInstanceChosen,
+        idVehicle,
+        listPrice,
+      },
+      setIsSave,
+      setNotification
+    );
+  };
   return (
     <Card sx={{ mb: 4 }}>
       <MDBox display="flex" justifyContent="space-between" alignItems="center" pt={3} px={4}>
@@ -112,10 +196,6 @@ function AddTrip() {
                   onChange={(e) => {
                     setIdTripInstanceChosen(e.target.value);
                     setIsSaveStation(true);
-                    // setDataAdd({
-                    //   ...dataAdd,
-                    //   idRoute: e.target.value,
-                    // });
                   }}
                   style={{ height: "100%" }}
                 >
@@ -156,12 +236,13 @@ function AddTrip() {
                         <TextField
                           variant="outlined"
                           sx={{ mt: 0, width: "100%" }}
-                          // onChange={(e) => {
-                          //   setDataAddRoute({
-                          //     ...dataAddRoute,
-                          //     descriptionStation1: e.target.value,
-                          //   });
-                          // }}
+                          onChange={(e) => {
+                            setPrice({
+                              ...price,
+                              price1: e.target.value,
+                            });
+                            handleValid1(e.target.value);
+                          }}
                         />
                       </MDBox>
                     )}
@@ -170,26 +251,38 @@ function AddTrip() {
                         <TextField
                           variant="outlined"
                           sx={{ mt: 0, width: "100%" }}
-                          // onChange={(e) => {
-                          //   setDataAddRoute({
-                          //     ...dataAddRoute,
-                          //     descriptionStation1: e.target.value,
-                          //   });
-                          // }}
+                          onChange={(e) => {
+                            setPrice({
+                              ...price,
+                              price2: e.target.value,
+                            });
+                            handleValid2(e.target.value);
+                          }}
                         />
                       </MDBox>
                     )}
                     {listStation.length > 2 && (
                       <MDBox ml={1} mt={1} width="100%">
+                        {/* <TextField
+                          variant="outlined"
+                          sx={{ mt: -1, width: "100%" }}
+                          onChange={(e) => {
+                            setVehicle({
+                              ...vehicle,
+                              seatQuantity: e.target.value,
+                            });
+                          }}
+                        /> */}
                         <TextField
                           variant="outlined"
                           sx={{ mt: 0, width: "100%" }}
-                          // onChange={(e) => {
-                          //   setDataAddRoute({
-                          //     ...dataAddRoute,
-                          //     descriptionStation1: e.target.value,
-                          //   });
-                          // }}
+                          onChange={(e) => {
+                            setPrice({
+                              ...price,
+                              price3: e.target.value,
+                            });
+                            handleValid3(e.target.value);
+                          }}
                         />
                       </MDBox>
                     )}
@@ -221,10 +314,6 @@ function AddTrip() {
                   onChange={(e) => {
                     setIdVehicleChosen(e.target.value);
                     setIsSaveVehicle(true);
-                    // setDataAdd({
-                    //   ...dataAdd,
-                    //   idRoute: e.target.value,
-                    // });
                   }}
                   style={{ height: "100%" }}
                 >
@@ -241,39 +330,34 @@ function AddTrip() {
               <MDBox pt={1} pb={2} px={2}>
                 <MDBox component="ul" display="flex" flexDirection="column" p={0} m={0}>
                   <MDBox mt="-40px">
-                    {listVehicleChosen.length > 1
-                      ? listVehicleChosen.map((item, index) => (
-                          <MDBox width="100%">
-                            {index > 0 && (
-                              <MDBox display="flex">
-                                <MDBox mt={0} mb={1} ml={4} width="90%" alignSelf="flex-end">
-                                  <Item
-                                    stt={index}
-                                    dep={item.nameVehicle}
-                                    des={item.licensePlate}
-                                    time={item.licensePlate}
-                                  />
-                                </MDBox>
-                                <MDBox mt={0} mb={2} ml={4} width="10%" alignSelf="flex-end">
-                                  <HighlightOffRoundedIcon
-                                    style={{
-                                      // fontSize: 40,
-                                      color: "red",
-                                      cursor: "pointer",
-                                      marginLeft: 40,
-                                      marginTop: -4,
-                                    }}
-                                    // onClick={() => {
-                                    //   handleRemoveItem(item.id);
-                                    //   setIsRemove(true);
-                                    // }}
-                                  />
-                                </MDBox>
-                              </MDBox>
-                            )}
+                    {listVehicleChosen.map((item, index) => (
+                      <MDBox width="100%">
+                        <MDBox display="flex">
+                          <MDBox mt={0} mb={1} ml={4} width="90%" alignSelf="flex-end">
+                            <Item
+                              stt={index + 1}
+                              dep={item.nameVehicle}
+                              des={item.licensePlate}
+                              time={item.seatQuantity.quantity}
+                            />
                           </MDBox>
-                        ))
-                      : null}
+                          <MDBox mt={0} mb={2} ml={4} width="10%" alignSelf="flex-end">
+                            <HighlightOffRoundedIcon
+                              style={{
+                                // fontSize: 40,
+                                color: "red",
+                                cursor: "pointer",
+                                marginLeft: 40,
+                                marginTop: -4,
+                              }}
+                              onClick={() => {
+                                handleRemoveItem(item.id);
+                              }}
+                            />
+                          </MDBox>
+                        </MDBox>
+                      </MDBox>
+                    ))}
                   </MDBox>
                 </MDBox>
               </MDBox>
@@ -281,13 +365,41 @@ function AddTrip() {
           </MDBox>
         </MDBox>
         <MDBox mt={4} mb={2} ml="90%" width="50px">
-          <MDButton component="" to="/admin/dashboard" variant="gradient" fullWidth color="info">
-            Save
-          </MDButton>
+          {listVehicleChosen.length > 0 && !disabled ? (
+            <MDButton
+              component=""
+              to="/admin/dashboard"
+              variant="gradient"
+              fullWidth
+              color="info"
+              onClick={() => {
+                handleCreateTrip();
+              }}
+            >
+              Lưu
+            </MDButton>
+          ) : (
+            <MDButton
+              component=""
+              to="/admin/dashboard"
+              variant="gradient"
+              fullWidth
+              color="info"
+              disabled
+              onClick={() => {
+                handleCreateTrip();
+              }}
+            >
+              Lưu
+            </MDButton>
+          )}
         </MDBox>
       </MDBox>
     </Card>
   );
 }
-
+AddTrip.propTypes = {
+  setIsSave: PropTypes.func.isRequired,
+  setNotification: PropTypes.func.isRequired,
+};
 export default AddTrip;
