@@ -2,7 +2,41 @@ import axios from "axios";
 import { setLocalStorage, STORAGE, removeLocalStorage, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-function login(Data, navigate, setErr) {
+function currentUser(accessToken, Data, navigate, role, setErr) {
+  axios({
+    method: "get",
+    url: `${baseUrl}auth/current`,
+    headers: {
+      authorization: `${accessToken}`,
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => {
+      if (
+        (data.authorities[0].authority === "ROLE_AGENCY" && role === 1) ||
+        (data.authorities[0].authority === "ROLE_ADMIN" && role === 0)
+      ) {
+        setLocalStorage(STORAGE.USER_DATA, JSON.stringify(Data));
+        setLocalStorage(STORAGE.USER_TOKEN, accessToken);
+        setLocalStorage("EXPIRE", JSON.stringify(new Date()));
+        if (data.authorities[0].authority === "ROLE_AGENCY") {
+          setLocalStorage("POSITION", "AGENCY");
+          navigate("/admin/dashboard");
+        } else {
+          setLocalStorage("POSITION", "ADMIN");
+          navigate("/admin/profile");
+        }
+      } else {
+        setErr("Vui lòng kiểm tra quyền truy cập");
+      }
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function login(Data, navigate, setErr, role) {
   axios({
     method: "post",
     url: `${baseUrl}auth/login`,
@@ -10,14 +44,12 @@ function login(Data, navigate, setErr) {
   })
     .then((res) => res.data)
     .then((data) => {
-      console.log(data);
       if (data.message) {
+        // setErr("Vui lòng kiểm tra lại tài khoản hoặc mật khẩu");
         setErr(data.message);
+        alert(data.message);
       } else {
-        setLocalStorage(STORAGE.USER_DATA, JSON.stringify(data));
-        setLocalStorage(STORAGE.USER_TOKEN, data.accessToken);
-        setLocalStorage("EXPIRE", JSON.stringify(new Date()));
-        navigate("/admin/dashboard");
+        currentUser(data.accessToken, data, navigate, role, setErr);
       }
     })
     .catch((err) => {
@@ -57,24 +89,6 @@ function logout(navigate) {
       removeLocalStorage(STORAGE.USER_TOKEN);
       removeLocalStorage("EXPIRE");
       navigate("/authentication/sign-in");
-    })
-    .catch((err) => {
-      console.log(err);
-    });
-}
-
-function currentUser() {
-  axios({
-    method: "get",
-    url: `${baseUrl}auth/current`,
-    headers: {
-      authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
-      "content-type": "application/json",
-    },
-  })
-    .then((res) => res.data)
-    .then((data) => {
-      console.log(data);
     })
     .catch((err) => {
       console.log(err);

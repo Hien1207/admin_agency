@@ -41,6 +41,7 @@ import BasicLayout from "layouts/authentication/components/BasicLayout";
 // Images
 import bgImage from "assets/images/bg-sign-in-basic.jpeg";
 import { login } from "Apis/auth.api";
+import { FormControl, InputLabel, Select, MenuItem } from "@mui/material";
 
 // import SignUp from "layouts/authentication/sign-up";
 
@@ -51,11 +52,20 @@ function Basic() {
   const [data, setData] = useState({
     username: "",
     password: "",
+    role: 0,
   });
   const [err, setErr] = useState("");
   const navigate = useNavigate();
   const handleLogin = () => {
-    login(data, navigate, setErr);
+    login(
+      {
+        username: data.username,
+        password: data.password,
+      },
+      navigate,
+      setErr,
+      data.role
+    );
   };
   return (
     <BasicLayout image={bgImage}>
@@ -72,7 +82,7 @@ function Basic() {
           textAlign="center"
         >
           <MDTypography variant="h4" fontWeight="medium" color="white" mt={1}>
-            Sign in
+            Đăng nhập
           </MDTypography>
           <Grid container spacing={3} justifyContent="center" sx={{ mt: 1, mb: 2 }}>
             <Grid item xs={2}>
@@ -97,7 +107,7 @@ function Basic() {
             <MDBox mb={2}>
               <MDInput
                 type="email"
-                label="Username"
+                label="Tên tài khoản"
                 fullWidth
                 onChange={(e) => {
                   setData({
@@ -110,7 +120,7 @@ function Basic() {
             <MDBox mb={2}>
               <MDInput
                 type="password"
-                label="Password"
+                label="Mật khẩu"
                 fullWidth
                 onChange={(e) => {
                   setData({
@@ -120,10 +130,36 @@ function Basic() {
                 }}
               />
             </MDBox>
+            <FormControl
+              size="small"
+              sx={{ width: "100%" }}
+              style={{
+                height: 40,
+                marginRight: 20,
+              }}
+            >
+              <InputLabel id="demo-simple-select-label">Quyền</InputLabel>
+              <Select
+                labelId="demo-simple-select-label"
+                id="demo-simple-select"
+                label="Quyền"
+                defaultValue={0}
+                onChange={(e) => {
+                  setData({
+                    ...data,
+                    role: e.target.value,
+                  });
+                }}
+                style={{ height: "100%" }}
+              >
+                <MenuItem value={0}>Quản trị</MenuItem>
+                <MenuItem value={1}>Hãng xe</MenuItem>
+              </Select>
+            </FormControl>
             {err ? (
-              <MDBox mt={-1} mb={1} textAlign="start">
+              <MDBox mt={0.5} mb={0.5} ml={1.5} textAlign="start">
                 <MDTypography color="error" fontWeight="small" textGradient fontSize={13}>
-                  Login failed
+                  {err} haha
                 </MDTypography>
               </MDBox>
             ) : null}
@@ -151,10 +187,10 @@ function Basic() {
                   handleLogin();
                 }}
               >
-                sign in
+                Đăng nhập
               </MDButton>
             </MDBox>
-            <MDBox mt={3} mb={1} textAlign="center">
+            {/* <MDBox mt={3} mb={1} textAlign="center">
               <MDTypography variant="button" color="text">
                 Don&apos;t have an account?{" "}
                 <MDTypography
@@ -168,7 +204,7 @@ function Basic() {
                   Sign up
                 </MDTypography>
               </MDTypography>
-            </MDBox>
+            </MDBox> */}
           </MDBox>
         </MDBox>
       </Card>
