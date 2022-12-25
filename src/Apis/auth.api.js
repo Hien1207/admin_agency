@@ -2,7 +2,7 @@ import axios from "axios";
 import { setLocalStorage, STORAGE, removeLocalStorage, getLocalStorage } from "Utils/storage";
 import baseUrl from "./config";
 
-function currentUser(accessToken, Data, navigate, role, setErr) {
+function currentUser1(accessToken, Data, navigate, role, setErr) {
   axios({
     method: "get",
     url: `${baseUrl}auth/current`,
@@ -49,7 +49,7 @@ function login(Data, navigate, setErr, role) {
         setErr(data.message);
         alert(data.message);
       } else {
-        currentUser(data.accessToken, data, navigate, role, setErr);
+        currentUser1(data.accessToken, data, navigate, role, setErr);
       }
     })
     .catch((err) => {
@@ -89,6 +89,26 @@ function logout(navigate) {
       removeLocalStorage(STORAGE.USER_TOKEN);
       removeLocalStorage("EXPIRE");
       navigate("/authentication/sign-in");
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+function currentUser(setProfile, setIsSave) {
+  axios({
+    method: "get",
+    url: `${baseUrl}auth/current`,
+    headers: {
+      authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => {
+      setProfile(data);
+      setIsSave(false);
+      console.log(data);
     })
     .catch((err) => {
       console.log(err);
