@@ -12,6 +12,7 @@ import Revenue from "layouts/revenue";
 
 // @mui icons
 import Icon from "@mui/material/Icon";
+import Agency from "layouts/agency";
 
 const routes = [
   {
@@ -84,6 +85,24 @@ const routes = [
     icon: <Icon fontSize="small">person</Icon>,
     route: "/admin/profile",
     component: <Profile />,
+    permission: "login",
+  },
+  {
+    type: "collapse",
+    name: "Đăng xuất",
+    key: "sign-in",
+    icon: <Icon fontSize="small">login</Icon>,
+    route: "/authentication/sign-in",
+    component: <SignIn />,
+    permission: "",
+  },
+  {
+    type: "collapse",
+    name: "Quản lý hãng xe",
+    key: "admin/agency",
+    icon: <Icon fontSize="small">receipt_long</Icon>,
+    route: "/admin/agency",
+    component: <Agency />,
     permission: "login",
   },
   {

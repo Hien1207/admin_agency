@@ -53,7 +53,7 @@ import { useMaterialUIController, setMiniSidenav, setOpenConfigurator } from "co
 import brandWhite from "assets/images/logo-ct.png";
 import brandDark from "assets/images/logo-ct-dark.png";
 import * as Sentry from "@sentry/react";
-import { STORAGE } from "Utils/storage";
+import { STORAGE, getLocalStorage } from "Utils/storage";
 
 export default function App() {
   try {
@@ -61,7 +61,10 @@ export default function App() {
     // if (!a) {
     //   throw new Error("This is a test on repo fe");
     // }
-
+    // let routes = allRoutes1.slice(0, 9);
+    // if (getLocalStorage("POSITION") === "ADMIN") {
+    //   routes = allRoutes1.slice(9, 11);
+    // }
     const [controller, dispatch] = useMaterialUIController();
     const {
       miniSidenav,
@@ -126,14 +129,19 @@ export default function App() {
         return null;
       });
 
-    const getRoutes = (allRoutes) =>
-      allRoutes.map((route) => {
+    const getRoutes = (allRoutes) => {
+      let routes1 = allRoutes.slice(9, 11);
+      if (getLocalStorage("POSITION") === "AGENCY") {
+        routes1 = allRoutes.slice(0, 9);
+      }
+      return routes1.map((route) => {
         if (route.route && route.permission) {
           return <Route exact path={route.route} element={route.component} key={route.key} />;
         }
 
         return null;
       });
+    };
     const elemDefault = () => {
       let res = null;
       if (
@@ -141,8 +149,10 @@ export default function App() {
         new Date().valueOf() - Date.parse(JSON.parse(localStorage.getItem("EXPIRE")) > 86400000)
       ) {
         res = <Route path="*" element={<Navigate to="/authentication/sign-in" />} />;
-      } else {
+      } else if (getLocalStorage("POSITION") === "AGENCY") {
         res = <Route path="*" element={<Navigate to="/admin/dashboard" />} />;
+      } else if (getLocalStorage("POSITION") === "ADMIN") {
+        res = <Route path="*" element={<Navigate to="/admin/agency" />} />;
       }
       return res;
     };
@@ -203,7 +213,9 @@ export default function App() {
             <Sidenav
               color={sidenavColor}
               brand={(transparentSidenav && !darkMode) || whiteSidenav ? brandDark : brandWhite}
-              brandName="Quản lý hãng xe"
+              brandName={
+                getLocalStorage("POSITION") === "ADMIN" ? "Trang quản trị" : "Quản lý hãng xe"
+              }
               routes={routes}
               onMouseEnter={handleOnMouseEnter}
               onMouseLeave={handleOnMouseLeave}
