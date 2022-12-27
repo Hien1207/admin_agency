@@ -64,7 +64,7 @@ function Agency() {
   };
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar title="Hãng xe" />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>

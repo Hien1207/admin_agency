@@ -130,9 +130,9 @@ export default function App() {
       });
 
     const getRoutes = (allRoutes) => {
-      let routes1 = allRoutes.slice(9, 11);
+      let routes1 = allRoutes.slice(8, 10);
       if (getLocalStorage("POSITION") === "AGENCY") {
-        routes1 = allRoutes.slice(0, 9);
+        routes1 = allRoutes.slice(0, 8);
       }
       return routes1.map((route) => {
         if (route.route && route.permission) {
