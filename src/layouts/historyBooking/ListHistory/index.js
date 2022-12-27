@@ -85,6 +85,7 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
       <MDBox pt={1} pb={2} px={2}>
         <Item
           stt="STT"
+          name="Tên khách hàng"
           route="Tuyến"
           dateOrder="Ngày đặt"
           date="Ngày đi"
@@ -120,6 +121,7 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
                       // setIsSave={setIsSave}
                       // setNotification={setNotification}
                       stt={index}
+                      name={item.customer.username}
                       route={item.route}
                       dateOrder={item.datOrder}
                       date={item.dateStart}

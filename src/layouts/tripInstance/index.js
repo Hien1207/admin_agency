@@ -82,7 +82,7 @@ function Trip() {
   };
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar title="Thời gian chuyến" />
       <MDBox pt={6} pb={3}>
         <Grid container spacing={6}>
           <Grid item xs={12}>

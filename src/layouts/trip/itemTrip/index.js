@@ -216,20 +216,26 @@ function ItemTrip({
               <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>
           </MDBox>
-          <MDButton
-            variant="text"
-            color={darkMode ? "white" : "dark"}
-            onClick={() => {
-              handleClickOpen();
-              setPrice({
-                price1: routeStationPrice[0]?.price,
-                price2: routeStationPrice[1]?.price,
-                price3: routeStationPrice[2]?.price,
-              });
-            }}
-          >
-            <Icon>edit</Icon>&nbsp;Sửa
-          </MDButton>
+          {new Date().valueOf() - Date.parse(date) < 0 ? (
+            <MDButton
+              variant="text"
+              color={darkMode ? "white" : "dark"}
+              onClick={() => {
+                handleClickOpen();
+                setPrice({
+                  price1: routeStationPrice[0]?.price,
+                  price2: routeStationPrice[1]?.price,
+                  price3: routeStationPrice[2]?.price,
+                });
+              }}
+            >
+              <Icon>edit</Icon>&nbsp;Sửa
+            </MDButton>
+          ) : (
+            <MDButton variant="text" color={darkMode ? "white" : "dark"} disabled>
+              <Icon>edit</Icon>&nbsp;Sửa
+            </MDButton>
+          )}
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose}>

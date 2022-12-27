@@ -37,6 +37,7 @@ import { deleteTripInstance, updateTripInstance } from "Apis/tripinstance.api";
 
 function ItemHistory({
   stt,
+  name,
   route,
   dateOrder,
   date,
@@ -87,6 +88,16 @@ function ItemHistory({
     >
       <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
         {stt}
+      </MDTypography>
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={1}
+        width="20%"
+        textAlign="left"
+      >
+        {name}
       </MDTypography>
       <MDTypography
         variant="caption"
@@ -238,6 +249,7 @@ ItemHistory.propTypes = {
   stt: PropTypes.string.isRequired,
   date: PropTypes.string.isRequired,
   time: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   route: PropTypes.string.isRequired,
   dateOrder: PropTypes.string.isRequired,
   nameVehicle: PropTypes.string.isRequired,
