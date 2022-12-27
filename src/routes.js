@@ -1,6 +1,5 @@
 // Material Dashboard 2 React layouts
 import Dashboard from "layouts/dashboard";
-import Profile from "layouts/profile";
 import SignIn from "layouts/authentication/sign-in";
 import SignUp from "layouts/authentication/sign-up";
 import Vehicle from "layouts/vehicle";
@@ -78,15 +77,15 @@ const routes = [
     component: <Revenue />,
     permission: "login",
   },
-  {
-    type: "collapse",
-    name: "Thông tin cá nhân",
-    key: "admin/profile",
-    icon: <Icon fontSize="small">person</Icon>,
-    route: "/admin/profile",
-    component: <Profile />,
-    permission: "login",
-  },
+  // {
+  //   type: "collapse",
+  //   name: "Thông tin cá nhân",
+  //   key: "admin/profile",
+  //   icon: <Icon fontSize="small">person</Icon>,
+  //   route: "/admin/profile",
+  //   component: <Profile />,
+  //   permission: "login",
+  // },
   {
     type: "collapse",
     name: "Đăng xuất",

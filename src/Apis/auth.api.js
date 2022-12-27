@@ -115,5 +115,25 @@ function currentUser(setProfile, setIsSave) {
     });
 }
 
-export { login, register, logout, currentUser };
+function getProfile(setProfile, setIsSave) {
+  axios({
+    method: "get",
+    url: `${baseUrl}profile/info`,
+    headers: {
+      authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
+      "content-type": "application/json",
+    },
+  })
+    .then((res) => res.data)
+    .then((data) => {
+      setProfile(data);
+      setIsSave(false);
+      console.log(data);
+    })
+    .catch((err) => {
+      console.log(err);
+    });
+}
+
+export { login, register, logout, currentUser, getProfile };
 // ${JSON.parse(getLocalStorage(STORAGE.USER_DATA)).tokenType}

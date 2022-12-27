@@ -41,7 +41,6 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
   //   }
   //   return name;
   // };
-
   const handleCreateRoute = () => {
     let requestObject = {
       ...dataAddRoute,
@@ -84,7 +83,6 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
         time: [time2, time3, time1],
       };
     }
-    // console.log(requestObject);
     createRouteStation(requestObject, setIsSave, setNotification);
   };
   return (

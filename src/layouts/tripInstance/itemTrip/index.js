@@ -72,6 +72,7 @@ function ItemTrip({
   const handleUpdateTripInstance = () => {
     updateTripInstance(dataUpdate, setIsSave, setNotification);
   };
+
   return (
     <MDBox
       pl={3}
@@ -141,9 +142,15 @@ function ItemTrip({
               <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>
           </MDBox>
-          <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
-            <Icon>edit</Icon>&nbsp;Sửa
-          </MDButton>
+          {new Date().valueOf() - Date.parse(date) < 0 ? (
+            <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
+              <Icon>edit</Icon>&nbsp;Sửa
+            </MDButton>
+          ) : (
+            <MDButton variant="text" color={darkMode ? "white" : "dark"} disabled>
+              <Icon>edit</Icon>&nbsp;Sửa
+            </MDButton>
+          )}
         </MDBox>
       )}
       <Dialog open={open} onClose={handleClose}>

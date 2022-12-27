@@ -10,7 +10,6 @@ import { PropTypes } from "prop-types";
 
 function ListTrip({ tripInstances, setIsSave, setNotification }) {
   const { columns, rows } = tabledatatrip();
-
   return (
     <Card id="delete-account">
       <MDBox pt={3} px={2}>

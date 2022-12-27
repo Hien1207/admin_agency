@@ -31,14 +31,14 @@ function Dashboard() {
   }, []);
   return (
     <DashboardLayout>
-      <DashboardNavbar />
+      <DashboardNavbar title="Trang chủ" />
       <MDBox py={3}>
         <Grid container spacing={3}>
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5} height="18rem">
               <ComplexStatisticsCard
                 color="dark"
-                icon="assignment"
+                icon="directions_bus"
                 title="Xe"
                 count={`+${allVehicle.length}`}
                 percentage={{
@@ -52,7 +52,7 @@ function Dashboard() {
           <Grid item xs={12} md={6} lg={3}>
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
-                icon="cottage"
+                icon="call_split"
                 title="Tuyến"
                 count={`+${allRoute.length}`}
                 percentage={{
@@ -67,7 +67,7 @@ function Dashboard() {
             <MDBox mb={1.5} height="18rem">
               <ComplexStatisticsCard
                 color="dark"
-                icon="assignment"
+                icon="details"
                 title="Chuyến"
                 count={`+${allTrip.length}`}
                 percentage={{
@@ -82,7 +82,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="success"
-                icon="groups"
+                icon="book_online"
                 title="Vé"
                 count={`+${allTicket.length}`}
                 percentage={{
@@ -97,7 +97,7 @@ function Dashboard() {
             <MDBox mb={1.5}>
               <ComplexStatisticsCard
                 color="primary"
-                icon="groups"
+                icon="bar_chart"
                 title={`Doanh thu ${new Date().getFullYear()}`}
                 count={`${revenue}`}
                 percentage={{

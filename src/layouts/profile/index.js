@@ -34,7 +34,7 @@ import MDTypography from "components/MDTypography";
 import Header from "layouts/profile/components/Header";
 import typography from "assets/theme/base/typography";
 import { useEffect, useState } from "react";
-import { currentUser } from "Apis/auth.api";
+import { getProfile } from "Apis/auth.api";
 import { Alert, Button } from "@mui/material";
 import Loading from "components/Loading";
 
@@ -56,16 +56,12 @@ function Overview() {
   const [isSave, setIsSave] = useState(true);
   const [notification, setNotification] = useState("");
   useEffect(() => {
-    currentUser(setProfile, setIsSave);
+    getProfile(setProfile, setIsSave);
   }, [profile]);
 
   // const handleUpdateProfile = () => {
   //   updateProfile(dataUpdate, setIsSave, setNotification);
   // };
-
-  console.log(profile);
-  console.log(setNotification);
-
   const [inValidPassword, setInValidPassword] = useState(false);
   const handleValidPassword = (val) => {
     if (val.length > 7) {
@@ -185,7 +181,7 @@ function Overview() {
                             birthday: &nbsp;
                           </MDTypography>
                           <MDTypography variant="button" fontWeight="regular" color="text">
-                            &nbsp;{profile.body?.birthday.slice(0, 10)}
+                            &nbsp;{profile.body?.birthday}
                           </MDTypography>
                         </MDBox>
                         <MDBox display="flex" py={1} pr={2}>
