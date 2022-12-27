@@ -34,7 +34,7 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
 
   React.useEffect(() => {
     getRouteStationById(idRoute, setStationById, setIsSave, setNotification, setNumberStation);
-  }, []);
+  }, [idRoute]);
 
   React.useEffect(() => {
     let requestObject = {};
