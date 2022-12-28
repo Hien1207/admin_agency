@@ -88,11 +88,15 @@ function Route() {
             </MDBox>
 
             <MDBox mb={3} display="block">
-              <AddRoute
-                listStation={listStation}
-                setIsSave={setIsSave}
-                setNotification={setNotification}
-              />
+              {isSave ? (
+                <Loading type="spin" color="rgb(41,130,235)" />
+              ) : (
+                <AddRoute
+                  listStation={listStation}
+                  setIsSave={setIsSave}
+                  setNotification={setNotification}
+                />
+              )}
               {elemNoti()}
               {isSave ? (
                 <Loading type="spin" color="rgb(41,130,235)" />
