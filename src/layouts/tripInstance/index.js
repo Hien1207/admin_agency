@@ -103,13 +103,17 @@ function Trip() {
             <MDBox mb={3} display="block">
               <Grid container spacing={3}>
                 <Grid item xs={12} md={5}>
-                  <AddTrip
-                    routes={routes}
-                    setIdRouteChosen={setIdRouteChosen}
-                    setIsSaveStation={setIsSaveStation}
-                    setIsSave={setIsSave}
-                    setNotification={setNotification}
-                  />
+                  {isSave ? (
+                    <Loading type="spin" color="rgb(41,130,235)" />
+                  ) : (
+                    <AddTrip
+                      routes={routes}
+                      setIdRouteChosen={setIdRouteChosen}
+                      setIsSaveStation={setIsSaveStation}
+                      setIsSave={setIsSave}
+                      setNotification={setNotification}
+                    />
+                  )}
                 </Grid>
                 <Grid item xs={12} md={7}>
                   {isSaveStation ? (
