@@ -1,6 +1,6 @@
 {
   "name": "material-dashboard-2-react",
-  "homepage": "https://lythanhhai.github.io/deploy-admin-agency/",
+  "homepage": "https://lythanhhai.github.io/admin_agency/",
   "version": "2.1.0",
   "private": true,
   "author": "Creative Tim",
@@ -32,7 +32,6 @@
     "axios": "^1.2.0",
     "chart.js": "3.4.1",
     "chroma-js": "2.4.2",
-    "gh-pages": "^4.0.0",
     "prop-types": "^15.8.1",
     "react": "17.0.2",
     "react-chartjs-2": "3.0.4",
@@ -85,6 +84,7 @@
     "eslint-plugin-prettier": "4.0.0",
     "eslint-plugin-react": "7.28.0",
     "eslint-plugin-react-hooks": "4.3.0",
+    "gh-pages": "^4.0.0",
     "prettier": "2.5.1"
   }
 }
