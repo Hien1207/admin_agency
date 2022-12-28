@@ -44,6 +44,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
                   style={{
                     height: 40,
                   }}
+                  required
                 >
                   <InputLabel id="demo-simple-select-label">Tuyến</InputLabel>
                   <Select
@@ -107,6 +108,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
                   id="time"
                   label="Thời gian khởi hành"
                   type="time"
+                  required
                   // defaultValue="03:30"
                   sx={{ width: "100%", mt: -1 }}
                   InputLabelProps={{
@@ -123,7 +125,7 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
             </MDBox>
           </MDBox>
         </MDBox>
-        <MDBox mt={4} mb={2} ml="79%" width="50px">
+        <MDBox mt={4} mb={2} ml="80%" width="50px">
           <MDButton
             component=""
             to="/admin/dashboard"
@@ -133,8 +135,9 @@ function AddTrip({ routes, setIdRouteChosen, setIsSaveStation, setIsSave, setNot
             onClick={() => {
               handleCreateTripInstance();
             }}
+            disabled={!dataAdd.date || !dataAdd.idRoute || !dataAdd.timeStart}
           >
-            Save
+            Lưu
           </MDButton>
         </MDBox>
       </MDBox>

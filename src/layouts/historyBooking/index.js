@@ -40,7 +40,6 @@ function HistoryBooking() {
   }, []);
   useEffect(() => {
     if (isSave) {
-      // if (search.value) {
       if (search.type === 0) {
         getListHistory(setListHistory, setIsSave);
       } else if (search.type === 1) {
@@ -64,12 +63,9 @@ function HistoryBooking() {
       } else if (search.type === 4) {
         getListHistoryByYear(search.value, setListHistory, setIsSave);
       }
-      // } else {
-      //   getListHistory(setListHistory, setIsSave);
-      // }
     }
   }, [isSave]);
-  console.log(listHistory);
+
   return (
     <DashboardLayout>
       <DashboardNavbar title="Vé" />

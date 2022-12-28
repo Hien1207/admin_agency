@@ -17,7 +17,7 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
   return (
     <Card id="delete-account">
       <MDBox py={3} px={2} display="flex" flexDirection="row" alignItems="center">
-        <MDTypography variant="h6" fontWeight="medium" mx={2}>
+        <MDTypography variant="h6" fontWeight="medium" mx={1} mr={2}>
           Danh sách
         </MDTypography>
         <FormControl
@@ -49,8 +49,8 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
             <MenuItem value={0}>Tất Cả</MenuItem>
             <MenuItem value={1}>Ngày đặt</MenuItem>
             <MenuItem value={2}>Ngày đi</MenuItem>
-            <MenuItem value={3}>Tên khách hàng</MenuItem>
-            <MenuItem value={4}>Năm</MenuItem>
+            <MenuItem value={3}>Số điện thoại</MenuItem>
+            {/* <MenuItem value={4}>Năm</MenuItem> */}
           </Select>
         </FormControl>
         {search.type === 0 ? null : (
@@ -76,6 +76,7 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
               onClick={() => {
                 setIsSave(true);
               }}
+              disabled={!search.value}
             >
               Tìm kiếm
             </MDButton>
@@ -85,7 +86,7 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
       <MDBox pt={1} pb={2} px={2}>
         <Item
           stt="STT"
-          name="Tên khách hàng"
+          name="Số điện thoại"
           route="Tuyến"
           dateOrder="Ngày đặt"
           date="Ngày đi"
@@ -120,7 +121,7 @@ function ListHistory({ listHistory, setSearch, search, setIsSave, isSave }) {
                       // hide={false}
                       // setIsSave={setIsSave}
                       // setNotification={setNotification}
-                      stt={index}
+                      stt={index + 1}
                       name={item.customer.username}
                       route={item.route}
                       dateOrder={item.datOrder}

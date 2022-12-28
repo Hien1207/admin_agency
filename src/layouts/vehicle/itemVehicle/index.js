@@ -77,30 +77,37 @@ function ItemVehicle({
       <MDTypography variant="caption" color="text" fontWeight="medium" width="10%">
         {stt}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" width="20%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" width="23%">
         {name}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="15%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="17%">
         {licensePlate}
       </MDTypography>
       <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="15%">
         {seatQuantity}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="10%">
-        {status}
-      </MDTypography>
+      {hide ? (
+        <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="20%">
+          {status}
+        </MDTypography>
+      ) : (
+        <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="20%">
+          {status === "true" ? "Đang hoạt động" : "Dừng hoạt động"}
+        </MDTypography>
+      )}
+
       {/* <TextField type="checkbox" value={status} /> */}
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={-2} width="15%">
+        <MDBox display="flex" alignItems="center" mt={-2} width="10%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={-3} width="15%">
-          <MDBox>
+        <MDBox display="flex" alignItems="center" mt={-3} width="10%">
+          {/* <MDBox>
             <MDButton variant="text" color="error" disabled>
               <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>
-          </MDBox>
+          </MDBox> */}
           <MDButton variant="text" color={darkMode ? "white" : "dark"} onClick={handleClickOpen}>
             <Icon>edit</Icon>&nbsp;Sửa
           </MDButton>
@@ -113,7 +120,7 @@ function ItemVehicle({
             autoFocus
             margin="dense"
             id="name"
-            label="tên"
+            label="Tên"
             type="text"
             fullWidth
             variant="standard"
@@ -130,7 +137,7 @@ function ItemVehicle({
             autoFocus
             margin="dense"
             id="name"
-            label="biển số xe"
+            label="Biển số xe"
             type="text"
             fullWidth
             variant="standard"
@@ -148,7 +155,7 @@ function ItemVehicle({
             autoFocus
             margin="dense"
             id="name"
-            label="số lượng ghế"
+            label="Số lượng ghế"
             type="text"
             fullWidth
             variant="standard"
@@ -160,24 +167,8 @@ function ItemVehicle({
                 seatQuantity: e.target.value,
               });
             }}
+            disabled
           />
-          {/* <TextField
-            autoFocus
-            margin="dense"
-            id="name"
-            label="status"
-            type="text"
-            fullWidth
-            variant="standard"
-            sx={{ width: "450px", mx: 4 }}
-            defaultValue={status}
-            onChange={(e) => {
-              setVehicle({
-                ...vehicle,
-                nameVehicle: e.target.value,
-              });
-            }}
-          /> */}
         </DialogContent>
         <DialogActions>
           <Button onClick={handleClose}>Hủy</Button>
@@ -186,6 +177,7 @@ function ItemVehicle({
               handleUpdateVehicle();
               handleClose();
             }}
+            disabled={!vehicle.nameVehicle}
           >
             Cập nhật
           </Button>

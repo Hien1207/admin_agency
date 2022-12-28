@@ -75,12 +75,12 @@ function ItemTrip({
 
   return (
     <MDBox
-      pl={3}
+      pl={2}
       display="flex"
       height="3.5rem"
-      pt={2}
       borderBottom="0.2px solid #f0f2f5"
       width="100%"
+      alignItems="center"
     >
       <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="10%">
         {stt}
@@ -110,7 +110,7 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="16%"
         textAlign="left"
       >
         {date}
@@ -120,18 +120,18 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="16%"
         textAlign="left"
       >
         {time}
       </MDTypography>
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
+        <MDBox display="flex" alignItems="center" mt={0} width="10%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
-          <MDBox mr={2} ml={2}>
+        <MDBox display="flex" alignItems="center" mt={0} width="10%">
+          <MDBox mr={1} ml={1}>
             <MDButton
               variant="text"
               color="error"
@@ -184,10 +184,17 @@ function ItemTrip({
             sx={{ width: "450px", mx: 4 }}
             value={dataUpdate.timeStart}
             onChange={(e) => {
-              setDataUpdate({
-                ...dataUpdate,
-                timeStart: `${e.target.value}:00`,
-              });
+              if (!e.target.value) {
+                setDataUpdate({
+                  ...dataUpdate,
+                  timeStart: `${e.target.value}`,
+                });
+              } else {
+                setDataUpdate({
+                  ...dataUpdate,
+                  timeStart: `${e.target.value}:00`,
+                });
+              }
             }}
           />
         </DialogContent>
@@ -198,6 +205,7 @@ function ItemTrip({
               handleUpdateTripInstance();
               handleClose();
             }}
+            disabled={!dataUpdate.date || !dataUpdate.timeStart}
           >
             Cập nhật
           </Button>

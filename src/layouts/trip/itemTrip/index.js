@@ -151,8 +151,14 @@ function ItemTrip({
     );
   };
   return (
-    <MDBox pl={3} display="flex" height="3.5rem" pt={2} borderBottom="0.2px solid #f0f2f5">
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="10%">
+    <MDBox
+      pl={1}
+      display="flex"
+      height="3.5rem"
+      borderBottom="0.2px solid #f0f2f5"
+      alignItems="center"
+    >
+      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="7%">
         {stt}
       </MDTypography>
       <MDTypography
@@ -160,7 +166,7 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="14%"
         textAlign="left"
       >
         {dep}
@@ -170,7 +176,7 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="14%"
         textAlign="left"
       >
         {des}
@@ -180,7 +186,7 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="14%"
         textAlign="left"
       >
         {date}
@@ -190,7 +196,7 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="14%"
         textAlign="left"
       >
         {time}
@@ -200,18 +206,18 @@ function ItemTrip({
         color="text"
         fontWeight="medium"
         ml={1}
-        width="17%"
+        width="14%"
         textAlign="left"
       >
         {vehicle}
       </MDTypography>
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
+        <MDBox display="flex" alignItems="center" mt={0} width="10%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={-2} width="40%">
-          <MDBox mr={2} ml={2}>
+        <MDBox display="flex" alignItems="center" mt={0} width="10%">
+          <MDBox mr={0} ml={0}>
             <MDButton variant="text" color="error" disabled>
               <Icon>delete</Icon>&nbsp;Xóa
             </MDButton>

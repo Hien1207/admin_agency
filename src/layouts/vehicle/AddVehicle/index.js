@@ -13,7 +13,7 @@ function AddVehicle({ setClickSave, setNotification }) {
   const [vehicle, setVehicle] = useState({
     licensePlate: "",
     nameVehicle: "",
-    seatQuantity: 0,
+    seatQuantity: 46,
     status: true,
   });
   const handleCreateVehicle = () => {
@@ -64,7 +64,7 @@ function AddVehicle({ setClickSave, setNotification }) {
             />
           </MDBox>
         </MDBox>
-        <MDBox mb={2} display="flex">
+        {/* <MDBox mb={2} display="flex">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="30%">
             Số lượng ghế
           </MDTypography>
@@ -80,7 +80,7 @@ function AddVehicle({ setClickSave, setNotification }) {
               }}
             />
           </MDBox>
-        </MDBox>
+        </MDBox> */}
         {/* <MDBox mb={2} display="flex">
           <MDTypography variant="caption" color="text" fontWeight="bold" width="80px">
             Status
@@ -108,8 +108,9 @@ function AddVehicle({ setClickSave, setNotification }) {
             onClick={() => {
               handleCreateVehicle();
             }}
+            disabled={!vehicle.nameVehicle || !vehicle.licensePlate}
           >
-            Save
+            Lưu
           </MDButton>
         </MDBox>
       </MDBox>

@@ -141,6 +141,7 @@ function ListAgency({ listAgency, setIsSave, setNotification }) {
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
+            inputProps={{ inputMode: "numeric", pattern: "[0-9]*" }}
             onChange={(e) => {
               setData({
                 ...data,
@@ -246,19 +247,25 @@ function ListAgency({ listAgency, setIsSave, setNotification }) {
               });
             }}
           />
-          {/* <TextField
+          <TextField
             autoFocus
             margin="dense"
             id="name"
-            label="tên"
+            label="Tên tài khoản"
             type="text"
             fullWidth
             variant="standard"
             sx={{ width: "450px", mx: 4 }}
             onChange={(e) => {
-              console.log(e);
+              setData({
+                ...data,
+                signupRequest: {
+                  ...data.signupRequest,
+                  username: e.target.value,
+                },
+              });
             }}
-          /> */}
+          />
           <TextField
             autoFocus
             margin="dense"
@@ -286,6 +293,17 @@ function ListAgency({ listAgency, setIsSave, setNotification }) {
               handleAddAgency();
               handleClose();
             }}
+            disabled={
+              !data.inforRequest.email ||
+              !data.inforRequest.name ||
+              !data.inforRequest.phone ||
+              !data.inforRequest.wards ||
+              !data.inforRequest.city ||
+              !data.inforRequest.country ||
+              !data.inforRequest.address ||
+              !data.signupRequest.username ||
+              !data.signupRequest.password
+            }
           >
             Thêm
           </Button>
