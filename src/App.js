@@ -142,6 +142,9 @@ export default function App() {
         return null;
       });
     };
+    useEffect(() => {
+      console.log("a");
+    }, []);
     const elemDefault = () => {
       let res = null;
       if (
