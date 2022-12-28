@@ -78,7 +78,7 @@ function ListRoute({ listRoute, listStation, setIsSave, setNotification }) {
                     return `${itemRouteStation.stationS?.nameStation}, `;
                   })}
                 time={convertTimeToNumber(
-                  item.routeStationList[0].time,
+                  item.routeStationList[0]?.time,
                   item.routeStationList[1]?.time,
                   item.routeStationList[2]?.time
                 )}

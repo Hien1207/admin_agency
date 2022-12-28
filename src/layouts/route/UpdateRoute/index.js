@@ -49,9 +49,9 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
       id2 &&
       idRoute &&
       dataUpdate.listIdRouteStation.length > 0 &&
-      dataUpdate.time[0] !== ":00" &&
-      dataUpdate.time[1] !== ":00" &&
-      dataUpdate.time[2] !== ":00"
+      dataUpdate.time?.[0] !== ":00" &&
+      dataUpdate.time?.[1] !== ":00" &&
+      dataUpdate.time?.[2] !== ":00"
     ) {
       setDisabled(false);
     } else {
