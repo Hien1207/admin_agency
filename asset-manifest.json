@@ -1,12 +1,12 @@
 {
   "files": {
-    "main.js": "/deploy-admin-agency/static/js/main.038cf6cb.js",
-    "static/media/bg-sign-in-basic.jpeg": "/deploy-admin-agency/static/media/bg-sign-in-basic.f327db1d0e4b00ba3c81.jpeg",
-    "static/media/bg-sign-up-cover.jpeg": "/deploy-admin-agency/static/media/bg-sign-up-cover.30c5950b22e74f0d82ba.jpeg",
-    "index.html": "/deploy-admin-agency/index.html",
-    "main.038cf6cb.js.map": "/deploy-admin-agency/static/js/main.038cf6cb.js.map"
+    "main.js": "/admin_agency/static/js/main.477b6335.js",
+    "static/media/bg-sign-in-basic.jpeg": "/admin_agency/static/media/bg-sign-in-basic.f327db1d0e4b00ba3c81.jpeg",
+    "static/media/bg-sign-up-cover.jpeg": "/admin_agency/static/media/bg-sign-up-cover.30c5950b22e74f0d82ba.jpeg",
+    "index.html": "/admin_agency/index.html",
+    "main.477b6335.js.map": "/admin_agency/static/js/main.477b6335.js.map"
   },
   "entrypoints": [
-    "static/js/main.038cf6cb.js"
+    "static/js/main.477b6335.js"
   ]
 }
