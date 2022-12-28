@@ -77,18 +77,10 @@ function ListRoute({ listRoute, listStation, setIsSave, setNotification }) {
                     }
                     return `${itemRouteStation.stationS?.nameStation}, `;
                   })}
-                // time={item.routeStationList.map((itemRouteStation, indexIn) => {
-                //   if (
-                //     indexIn ===
-                //     item.routeStationList.slice(0, item.routeStationList.length - 1).length - 1
-                //   ) {
-                //     return `${itemRouteStation.stationS.nameStation}`;
-                //   }
-                //   return `${itemRouteStation.stationS.nameStation}, `;
-                // })}
                 time={convertTimeToNumber(
                   item.routeStationList[0].time,
-                  item.routeStationList[1]?.time
+                  item.routeStationList[1]?.time,
+                  item.routeStationList[2]?.time
                 )}
                 idRoute={item.route.id}
                 hide={false}

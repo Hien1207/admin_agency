@@ -63,13 +63,15 @@ const getListHistoryByDateStart = (Data, setListHistory, setIsSave) => {
 const getListHistoryByCustomer = (name, setListHistory, setIsSave) => {
   axios({
     method: "get",
-    url: `${baseUrl}admin/get-history-by-nameCustomer/${name}`,
+    url: `${baseUrl}admin/get-history-by-phone-customer/${name}`,
+    // url: `${baseUrl}admin/get-history-by-nameCustommer/${name}`,
     headers: {
       Authorization: `${getLocalStorage(STORAGE.USER_TOKEN)}`,
     },
   })
     .then((res) => res.data)
     .then((data) => {
+      // console.log(data);
       setListHistory(data);
       setIsSave(false);
     })

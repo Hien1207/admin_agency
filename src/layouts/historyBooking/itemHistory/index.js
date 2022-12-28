@@ -86,15 +86,15 @@ function ItemHistory({
       width="100%"
       alignItems="center"
     >
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="4%">
         {stt}
       </MDTypography>
       <MDTypography
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="20%"
+        ml={2}
+        width="12%"
         textAlign="left"
       >
         {name}
@@ -103,8 +103,8 @@ function ItemHistory({
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="20%"
+        ml={2}
+        width="16%"
         textAlign="left"
       >
         {route}
@@ -113,8 +113,8 @@ function ItemHistory({
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="14%"
+        ml={2}
+        width="11%"
         textAlign="left"
       >
         {dateOrder?.split("T")[0]}
@@ -123,8 +123,8 @@ function ItemHistory({
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="13%"
+        ml={2}
+        width="11%"
         textAlign="left"
       >
         {date?.split("T")[0]}
@@ -133,8 +133,8 @@ function ItemHistory({
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="13%"
+        ml={2}
+        width="11%"
         textAlign="left"
       >
         {time}
@@ -143,21 +143,11 @@ function ItemHistory({
         variant="caption"
         color="text"
         fontWeight="medium"
-        ml={1}
-        width="16%"
+        ml={2}
+        width="13%"
         textAlign="left"
       >
         {nameVehicle}
-      </MDTypography>
-      <MDTypography
-        variant="caption"
-        color="text"
-        fontWeight="medium"
-        ml={1}
-        width="10%"
-        textAlign="left"
-      >
-        {numberTicket}
       </MDTypography>
       <MDTypography
         variant="caption"
@@ -167,14 +157,24 @@ function ItemHistory({
         width="9%"
         textAlign="left"
       >
+        {numberTicket}
+      </MDTypography>
+      <MDTypography
+        variant="caption"
+        color="text"
+        fontWeight="medium"
+        ml={2}
+        width="10%"
+        textAlign="left"
+      >
         {totalPrice}
       </MDTypography>
       {hide ? (
-        <MDBox display="flex" alignItems="center" mt={0} width="20%">
+        <MDBox display="flex" alignItems="center" mt={0} width="0%">
           {null}
         </MDBox>
       ) : (
-        <MDBox display="flex" alignItems="center" mt={0} width="20%">
+        <MDBox display="flex" alignItems="center" mt={0} width="0%">
           <MDBox mr={0} ml={0}>
             <MDButton
               variant="text"

@@ -67,22 +67,22 @@ function ItemRoute({
       borderBottom="0.2px solid #f0f2f5"
       alignItems="center"
     >
-      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="5%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" marginLeft="5px" width="6%">
         {stt}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="14%">
         {dep}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="13%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="14%">
         {des}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="7%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="8%">
         {quantity}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="24%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={1} width="25%">
         {station}
       </MDTypography>
-      <MDTypography variant="caption" color="text" fontWeight="medium" ml={4} width="10%">
+      <MDTypography variant="caption" color="text" fontWeight="medium" ml={2} width="11%">
         {time}
       </MDTypography>
       {hide ? (
@@ -91,7 +91,7 @@ function ItemRoute({
         </MDBox>
       ) : (
         <MDBox display="flex" alignItems="center" mt={0} width="10%">
-          <MDBox mr={1} ml={1}>
+          <MDBox mr={0} ml={0}>
             <MDButton
               variant="text"
               color="error"

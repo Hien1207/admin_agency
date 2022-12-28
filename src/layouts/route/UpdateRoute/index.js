@@ -17,6 +17,7 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
   const [stationById, setStationById] = React.useState({});
   const [id1, setId1] = React.useState(0);
   const [id2, setId2] = React.useState(0);
+  const [disabled, setDisabled] = React.useState(true);
 
   const [dataUpdate, setDataUpdate] = React.useState({
     descriptionDep: "",
@@ -35,6 +36,28 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
   React.useEffect(() => {
     getRouteStationById(idRoute, setStationById, setIsSave, setNotification, setNumberStation);
   }, []);
+
+  React.useEffect(() => {
+    if (
+      dataUpdate.descriptionDep &&
+      dataUpdate.descriptionDes &&
+      dataUpdate.idDep &&
+      dataUpdate.idDes &&
+      dataUpdate.descriptionStation2 &&
+      dataUpdate.descriptionStation1 &&
+      id1 &&
+      id2 &&
+      idRoute &&
+      dataUpdate.listIdRouteStation.length > 0 &&
+      dataUpdate.time[0] !== ":00" &&
+      dataUpdate.time[1] !== ":00" &&
+      dataUpdate.time[2] !== ":00"
+    ) {
+      setDisabled(false);
+    } else {
+      setDisabled(true);
+    }
+  }, [dataUpdate, id1, id2]);
 
   React.useEffect(() => {
     let requestObject = {};
@@ -310,7 +333,11 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
                 }}
                 onChange={(e) => {
                   const arrTime = [...dataUpdate.time];
-                  arrTime[1] = `${e.target.value}:00`;
+                  if (!e.target.value) {
+                    arrTime[1] = `${e.target.value}`;
+                  } else {
+                    arrTime[1] = `${e.target.value}:00`;
+                  }
                   setDataUpdate({
                     ...dataUpdate,
                     time: arrTime,
@@ -393,7 +420,11 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
                 }}
                 onChange={(e) => {
                   const arrTime = [...dataUpdate.time];
-                  arrTime[2] = `${e.target.value}:00`;
+                  if (!e.target.value) {
+                    arrTime[2] = `${e.target.value}`;
+                  } else {
+                    arrTime[2] = `${e.target.value}:00`;
+                  }
                   setDataUpdate({
                     ...dataUpdate,
                     time: arrTime,
@@ -476,7 +507,11 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
               }}
               onChange={(e) => {
                 const arrTime = [...dataUpdate.time];
-                arrTime[0] = `${e.target.value}:00`;
+                if (!e.target.value) {
+                  arrTime[0] = `${e.target.value}`;
+                } else {
+                  arrTime[0] = `${e.target.value}:00`;
+                }
                 setDataUpdate({
                   ...dataUpdate,
                   time: arrTime,
@@ -504,6 +539,7 @@ function UpdateRoute({ listStation, handleClose, idRoute, setIsSave, setNotifica
               handleUpdateRoute();
               handleClose();
             }}
+            disabled={disabled}
           >
             Cập nhật
           </Button>

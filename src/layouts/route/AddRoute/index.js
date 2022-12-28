@@ -17,6 +17,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
   const [time1, setTime1] = React.useState("");
   const [time2, setTime2] = React.useState("");
   const [time3, setTime3] = React.useState("");
+  // const [disabled, setDisabled] = React.useState(false);
 
   const [dataAddRoute, setDataAddRoute] = React.useState({
     descriptionDep: "",
@@ -31,16 +32,108 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
     time: [],
   });
 
-  // const getNameStationById = (id) => {
-  //   let name = null;
-  //   for (let i = 0; i < listStation.length; i += 1) {
-  //     if (listStation[i].id === id) {
-  //       name = listStation[i].nameStation;
-  //       break;
+  // React.useEffect(() => {
+  //   if (numberStation === 0) {
+  //     if (
+  //       dataAddRoute.descriptionDep &&
+  //       dataAddRoute.descriptionDes &&
+  //       dataAddRoute.idDep &&
+  //       dataAddRoute.idDes &&
+  //       time1
+  //     ) {
+  //       setDisabled(false);
+  //     } else {
+  //       setDisabled(true);
+  //     }
+  //   } else if (numberStation === 1 && isRemoveFirst) {
+  //     if (
+  //       dataAddRoute.descriptionDep &&
+  //       dataAddRoute.descriptionDes &&
+  //       dataAddRoute.idDep &&
+  //       dataAddRoute.idDes &&
+  //       dataAddRoute.descriptionStation2 &&
+  //       dataAddRoute.idStation2 &&
+  //       time3 &&
+  //       time1
+  //     ) {
+  //       setDisabled(false);
+  //     } else {
+  //       setDisabled(true);
+  //     }
+  //   } else if (numberStation === 1 && !isRemoveFirst) {
+  //     if (
+  //       dataAddRoute.descriptionDep &&
+  //       dataAddRoute.descriptionDes &&
+  //       dataAddRoute.idDep &&
+  //       dataAddRoute.idDes &&
+  //       dataAddRoute.descriptionStation1 &&
+  //       dataAddRoute.idStation1 &&
+  //       time2 &&
+  //       time1
+  //     ) {
+  //       setDisabled(false);
+  //     } else {
+  //       setDisabled(true);
+  //     }
+  //   } else if (numberStation === 2) {
+  //     if (
+  //       dataAddRoute.descriptionDep &&
+  //       dataAddRoute.descriptionDes &&
+  //       dataAddRoute.idDep &&
+  //       dataAddRoute.idDes &&
+  //       dataAddRoute.descriptionStation2 &&
+  //       dataAddRoute.idStation2 &&
+  //       dataAddRoute.descriptionStation1 &&
+  //       dataAddRoute.idStation1 &&
+  //       time3 &&
+  //       time1 &&
+  //       time2
+  //     ) {
+  //       setDisabled(false);
+  //     } else {
+  //       setDisabled(true);
   //     }
   //   }
-  //   return name;
-  // };
+  // }, [dataAddRoute, numberStation, time1, time2, time3, isRemoveFirst]);
+
+  // React.useEffect(() => {
+  //   setDisabled(true);
+  // }, [numberStation]);
+
+  // React.useEffect(() => {
+  //   if (numberStation === 1 && isRemoveFirst) {
+  //     if (
+  //       dataAddRoute.descriptionDep &&
+  //       dataAddRoute.descriptionDes &&
+  //       dataAddRoute.idDep &&
+  //       dataAddRoute.idDes &&
+  //       dataAddRoute.descriptionStation2 &&
+  //       dataAddRoute.idStation2 &&
+  //       time3 &&
+  //       time1
+  //     ) {
+  //       setDisabled(false);
+  //     } else {
+  //       setDisabled(true);
+  //     }
+  //   } else if (numberStation === 1 && !isRemoveFirst) {
+  //     if (
+  //       dataAddRoute.descriptionDep &&
+  //       dataAddRoute.descriptionDes &&
+  //       dataAddRoute.idDep &&
+  //       dataAddRoute.idDes &&
+  //       dataAddRoute.descriptionStation1 &&
+  //       dataAddRoute.idStation1 &&
+  //       time2 &&
+  //       time1
+  //     ) {
+  //       setDisabled(false);
+  //     } else {
+  //       setDisabled(true);
+  //     }
+  //   }
+  // }, [isRemoveFirst]);
+
   const handleCreateRoute = () => {
     let requestObject = {
       ...dataAddRoute,
@@ -462,6 +555,7 @@ function AddRoute({ listStation, setIsSave, setNotification }) {
             onClick={() => {
               handleCreateRoute();
             }}
+            // disabled={disabled}
           >
             Lưu
           </MDButton>
